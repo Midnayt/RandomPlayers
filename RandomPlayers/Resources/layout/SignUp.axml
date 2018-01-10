@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_main"
+    android:id="@+id/activity_sign_up"
     android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -13,11 +13,11 @@
         android:layout_height="100dp" />
     <android.support.design.widget.TextInputLayout
         android:layout_below="@+id/icon"
-        android:id="@+id/login_input_email"
+        android:id="@+id/signup_input_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/login_email"
+            android:id="@+id/signup_email"
             android:hint="Enter your email"
             android:inputType="textCapWords"
             android:maxLines="1"
@@ -25,12 +25,12 @@
             android:layout_height="wrap_content" />
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
-        android:layout_below="@+id/login_input_email"
-        android:id="@+id/login_input_password"
+        android:layout_below="@+id/signup_input_email"
+        android:id="@+id/signup_input_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/login_password"
+            android:id="@+id/signup_password"
             android:hint="Enter your password"
             android:inputType="textPassword"
             android:maxLines="1"
@@ -38,16 +38,16 @@
             android:layout_height="wrap_content" />
     </android.support.design.widget.TextInputLayout>
     <Button
-        android:layout_below="@+id/login_input_password"
-        android:id="@+id/login_btn_login"
-        android:text="Login"
+        android:layout_below="@+id/signup_input_password"
+        android:id="@+id/signup_btn_register"
+        android:text="Register"
         android:background="#263238"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView
-        android:layout_below="@+id/login_btn_login"
-        android:id="@+id/login_btn_forgot_password"
+        android:layout_below="@+id/signup_btn_register"
+        android:id="@+id/signup_btn_forgot_password"
         android:layout_centerHorizontal="true"
         android:clickable="true"
         android:textStyle="bold"
@@ -57,8 +57,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <LinearLayout
-        android:layout_below="@+id/login_btn_forgot_password"
-        android:id="@+id/login_layout_or"
+        android:layout_below="@+id/signup_btn_forgot_password"
+        android:id="@+id/signup_layout_or"
         android:gravity="center"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -80,12 +80,12 @@
             android:layout_margin="5dp" />
     </LinearLayout>
     <TextView
-        android:layout_below="@+id/login_layout_or"
-        android:id="@+id/login_btn_sign_up"
+        android:layout_below="@+id/signup_layout_or"
+        android:id="@+id/signup_btn_login"
         android:layout_centerHorizontal="true"
         android:clickable="true"
         android:textStyle="bold"
-        android:text="Sign Up"
+        android:text="Already Account ? Login Me"
         android:textColor="@color/colorPrimaryDark"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"

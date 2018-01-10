@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "1086694928480",
+    "firebase_url": "https://random-players.firebaseio.com",
+    "project_id": "random-players",
+    "storage_bucket": "random-players.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1086694928480:android:fe293ffa63f63531",
+        "android_client_info": {
+          "package_name": "com.vunda.RandomPlayers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1086694928480-33gssgesrn7nstgfu3u3mvcfe3na22l1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vunda.RandomPlayers",
+            "certificate_hash": "e7f85a3b4d0e10321bb8e3eac4334e609d176cec"
+          }
+        },
+        {
+          "client_id": "1086694928480-07cg5367eukcqa01igj47cb9aqbeoqc6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-uXZR77L3jS5ifB-01ktaMZnc1H8DG7E"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1086694928480-07cg5367eukcqa01igj47cb9aqbeoqc6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1086694928480-7d74m02gqbjeplojm2fselio9gtfiuv9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "vunda.RandomPlayers"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
