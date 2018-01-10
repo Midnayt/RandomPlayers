@@ -11,7 +11,7 @@ using Android.Gms.Tasks;
 using Android.Support.Design.Widget;
 
 namespace RandomPlayers {
-    [Activity(Label = "RandomPlayers", MainLauncher = true, Icon = "@drawable/icon",Theme ="@style/AppTheme")]
+    [Activity(Label = "MainActivity", MainLauncher = false, Icon = "@drawable/icon",Theme ="@style/AppTheme")]
     public class MainActivity : AppCompatActivity,IOnClickListener,IOnCompleteListener
     {
         Button btnLogin;
@@ -20,15 +20,10 @@ namespace RandomPlayers {
 
         RelativeLayout activity_main;
         
-        FirebaseAuth auth;
-
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView (Resource.Layout.Main);
-
-            
-            auth = FirebaseAuth.Instance;
 
             //View
             btnLogin = FindViewById<Button>(Resource.Id.login_btn_login);
@@ -63,7 +58,7 @@ namespace RandomPlayers {
 
         private void LoginUser(string email, string password)
         {
-            auth.SignInWithEmailAndPassword(email, password)
+            FirebaseAuth.Instance.SignInWithEmailAndPassword(email, password)
                 .AddOnCompleteListener(this);
         }
 

@@ -2708,6 +2708,9 @@ namespace RandomPlayers
 			// aapt resource value: 0x7f0a000a
 			public const int ghost_view = 2131361802;
 			
+			// aapt resource value: 0x7f0a00d0
+			public const int gifImageView = 2131362000;
+			
 			// aapt resource value: 0x7f0a0005
 			public const int home = 2131361797;
 			
@@ -2783,14 +2786,14 @@ namespace RandomPlayers
 			// aapt resource value: 0x7f0a00af
 			public const int login_password = 2131361967;
 			
-			// aapt resource value: 0x7f0a00d2
-			public const int masked = 2131362002;
+			// aapt resource value: 0x7f0a00d4
+			public const int masked = 2131362004;
 			
 			// aapt resource value: 0x7f0a00ba
 			public const int media_actions = 2131361978;
 			
-			// aapt resource value: 0x7f0a00d0
-			public const int message = 2131362000;
+			// aapt resource value: 0x7f0a00d2
+			public const int message = 2131362002;
 			
 			// aapt resource value: 0x7f0a0038
 			public const int middle = 2131361848;
@@ -2833,6 +2836,9 @@ namespace RandomPlayers
 			
 			// aapt resource value: 0x7f0a0053
 			public const int pin = 2131361875;
+			
+			// aapt resource value: 0x7f0a00d1
+			public const int progressBar = 2131362001;
 			
 			// aapt resource value: 0x7f0a0006
 			public const int progress_circular = 2131361798;
@@ -3062,8 +3068,8 @@ namespace RandomPlayers
 			// aapt resource value: 0x7f0a0016
 			public const int view_offset_helper = 2131361814;
 			
-			// aapt resource value: 0x7f0a00d1
-			public const int visible = 2131362001;
+			// aapt resource value: 0x7f0a00d3
+			public const int visible = 2131362003;
 			
 			// aapt resource value: 0x7f0a0021
 			public const int wide = 2131361825;
@@ -3323,10 +3329,13 @@ namespace RandomPlayers
 			public const int SignUp = 2130903102;
 			
 			// aapt resource value: 0x7f03003f
-			public const int support_simple_spinner_dropdown_item = 2130903103;
+			public const int SplashScreen = 2130903103;
 			
 			// aapt resource value: 0x7f030040
-			public const int tooltip = 2130903104;
+			public const int support_simple_spinner_dropdown_item = 2130903104;
+			
+			// aapt resource value: 0x7f030041
+			public const int tooltip = 2130903105;
 			
 			static Layout()
 			{
@@ -3570,8 +3579,8 @@ namespace RandomPlayers
 			// aapt resource value: 0x7f0b0169
 			public const int Animation_Design_BottomSheetDialog = 2131427689;
 			
-			// aapt resource value: 0x7f0b018a
-			public const int AppTheme = 2131427722;
+			// aapt resource value: 0x7f0b018b
+			public const int AppTheme = 2131427723;
 			
 			// aapt resource value: 0x7f0b00a2
 			public const int Base_AlertDialog_AppCompat = 2131427490;
@@ -4460,6 +4469,9 @@ namespace RandomPlayers
 			
 			// aapt resource value: 0x7f0b0178
 			public const int Theme_Design_NoActionBar = 2131427704;
+			
+			// aapt resource value: 0x7f0b018a
+			public const int Theme_Splash = 2131427722;
 			
 			// aapt resource value: 0x7f0b0111
 			public const int ThemeOverlay_AppCompat = 2131427601;

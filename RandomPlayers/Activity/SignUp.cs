@@ -14,6 +14,7 @@ using Firebase.Auth;
 using static Android.Views.View;
 using Android.Gms.Tasks;
 using Android.Support.Design.Widget;
+using Firebase;
 
 namespace RandomPlayers {
     [Activity(Label = "SignUp",Theme ="@style/AppTheme")]
@@ -25,15 +26,16 @@ namespace RandomPlayers {
         EditText input_email, input_password;
         RelativeLayout activity_sign_up;
 
-        FirebaseAuth auth;
+        
+                
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.SignUp);
 
             //InitFirebase
-            auth = FirebaseAuth.Instance;
 
+            
             //View
             btnSignup = FindViewById<Button>(Resource.Id.signup_btn_register);
             btnLogin = FindViewById<TextView>(Resource.Id.signup_btn_login);
@@ -68,7 +70,7 @@ namespace RandomPlayers {
 
         private void SignUpUser(string email, string password)
         {
-            auth.CreateUserWithEmailAndPassword(email, password)
+            FirebaseAuth.Instance.CreateUserWithEmailAndPassword(email, password)
                 .AddOnCompleteListener(this, this);
             
         }
@@ -82,7 +84,7 @@ namespace RandomPlayers {
             }
             else
             {
-                Snackbar snackBar = Snackbar.Make(activity_sign_up, "Register Failed ", Snackbar.LengthShort);
+                Snackbar snackBar = Snackbar.Make(activity_sign_up, task.Exception.Message, Snackbar.LengthShort);
                 snackBar.Show();
             }
         }
