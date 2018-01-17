@@ -12,6 +12,7 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using Felipecsl.GifImageViewLibrary;
+using Firebase.Analytics;
 using Firebase.Auth;
 
 namespace RandomPlayers {
@@ -34,13 +35,14 @@ namespace RandomPlayers {
             gifImageView.SetBytes(bytes);
             gifImageView.StartAnimation();
 
-            var auth = FirebaseAuth.Instance;
 
             Timer timer = new Timer();
             timer.Interval = 3000;
             timer.AutoReset = false;
             timer.Elapsed += Timer_Elapsed;
             timer.Start();
+            var auth = FirebaseAuth.Instance;
+            var firebaseAnalytics = FirebaseAnalytics.GetInstance(this);
 
 
         }

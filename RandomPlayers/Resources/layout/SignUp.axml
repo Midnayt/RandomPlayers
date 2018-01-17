@@ -37,8 +37,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </android.support.design.widget.TextInputLayout>
-    <Button
+    <android.support.design.widget.TextInputLayout
         android:layout_below="@+id/signup_input_password"
+        android:id="@+id/signup_input_password_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/signup_password_confirm"
+            android:hint="Confirm your password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+    <Button
+        android:layout_below="@+id/signup_input_password_confirm"
         android:id="@+id/signup_btn_register"
         android:text="Register"
         android:background="#263238"

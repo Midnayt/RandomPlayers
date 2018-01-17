@@ -16,9 +16,8 @@ using Android.Gms.Tasks;
 using Android.Support.Design.Widget;
 
 namespace RandomPlayers {
-    [Activity(Label = "ForgotPassword",Theme ="@style/AppTheme")]
-    public class ForgotPassword : AppCompatActivity,IOnClickListener,IOnCompleteListener
-    {
+    [Activity(Label = "ForgotPassword", Theme = "@style/AppTheme")]
+    public class ForgotPassword : AppCompatActivity, IOnClickListener, IOnCompleteListener {
         private EditText input_email;
         private Button btnResetPass;
         private TextView btnBack;
@@ -26,8 +25,7 @@ namespace RandomPlayers {
 
 
         FirebaseAuth auth;
-        protected override void OnCreate(Bundle savedInstanceState)
-        {
+        protected override void OnCreate(Bundle savedInstanceState) {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.ForgotPassword);
 
@@ -44,35 +42,26 @@ namespace RandomPlayers {
             btnBack.SetOnClickListener(this);
         }
 
-        public void OnClick(View v)
-        {
-            if(v.Id == Resource.Id.forgot_btn_back)
-            {
+        public void OnClick(View v) {
+            if (v.Id == Resource.Id.forgot_btn_back) {
                 StartActivity(new Intent(this, typeof(MainActivity)));
                 Finish();
-            }
-            else if(v.Id == Resource.Id.forgot_btn_reset)
-            {
+            } else if (v.Id == Resource.Id.forgot_btn_reset) {
                 ResetPassword(input_email.Text);
             }
         }
 
-        private void ResetPassword(string email)
-        {
+        private void ResetPassword(string email) {
             auth.SendPasswordResetEmail(email)
                 .AddOnCompleteListener(this, this);
         }
 
-        public void OnComplete(Task task)
-        {
-           if(task.IsSuccessful == false)
-            {
+        public void OnComplete(Task task) {
+            if (task.IsSuccessful == false) {
                 Snackbar snackBar = Snackbar.Make(activity_forgot, "Reset password failed", Snackbar.LengthShort);
                 snackBar.Show();
-            }
-           else
-            {
-                Snackbar snackBar = Snackbar.Make(activity_forgot, "Reset password link sent to email : "+input_email.Text, Snackbar.LengthShort);
+            } else {
+                Snackbar snackBar = Snackbar.Make(activity_forgot, "Reset password link sent to email : " + input_email.Text, Snackbar.LengthShort);
                 snackBar.Show();
             }
         }

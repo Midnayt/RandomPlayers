@@ -9,6 +9,7 @@ using static Android.Views.View;
 using Android.Views;
 using Android.Gms.Tasks;
 using Android.Support.Design.Widget;
+using System.Net.Http;
 
 namespace RandomPlayers {
     [Activity(Label = "MainActivity", MainLauncher = false, Icon = "@drawable/icon",Theme ="@style/AppTheme")]
@@ -56,10 +57,11 @@ namespace RandomPlayers {
             }
         }
 
-        private void LoginUser(string email, string password)
+        private async void LoginUser(string email, string password)
         {
             FirebaseAuth.Instance.SignInWithEmailAndPassword(email, password)
-                .AddOnCompleteListener(this);
+                .AddOnCompleteListener(this);            
+                       
         }
 
         public void OnComplete(Task task)
@@ -67,7 +69,9 @@ namespace RandomPlayers {
            if(task.IsSuccessful)
             {
                 StartActivity(new Android.Content.Intent(this, typeof(DashBoard)));
+                
                 Finish();
+                
             }
            else
             {
