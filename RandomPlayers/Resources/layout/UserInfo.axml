@@ -1,53 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_forgot"
+    android:id="@+id/activity_user_info"
     android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-  <ImageView
-      android:id="@+id/icon"
-      android:layout_alignParentTop="true"
-      android:layout_centerHorizontal="true"
-      android:background="@drawable/firebase"
-      android:layout_width="100dp"
-      android:layout_height="100dp" />
-  <TextView
-      android:layout_below="@+id/icon"
-      android:id="@+id/forgot_message"
-      android:layout_centerHorizontal="true"
-      android:text="Sign your information here"
-      android:textColor="@color/colorPrimaryDark"
-      style="@style/Widget.AppCompat.Button.Borderless"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content" />
-  <android.support.design.widget.TextInputLayout
-      android:layout_below="@+id/forgot_message"
-      android:id="@+id/forgot_input_email"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content">
-    <EditText
-        android:id="@+id/forgot_email"
-        android:hint="Enter your email"
-        android:inputType="textCapWords"
-        android:maxLines="1"
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/firebase"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+    <android.support.design.widget.TextInputLayout
+        android:layout_below="@+id/icon"
+        android:id="@+id/info_input_first_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/info_first_name"
+            android:hint="Введіть своє ім'я"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_below="@+id/info_input_first_name"
+        android:id="@+id/info_input_last_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/info_last_name"
+            android:hint="Введіть прізвище"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_below="@+id/info_input_last_name"
+        android:id="@+id/info_input_country"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/info_country"
+            android:hint="Країна"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_below="@+id/info_input_country"
+        android:id="@+id/info_input_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/info_city"
+            android:hint="Місто"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_below="@+id/info_input_city"
+        android:id="@+id/info_input_birth_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/info_birth_date"
+            android:hint="Дата народження"
+            android:inputType="date"
+            android:maxLines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+    <Button
+        android:layout_below="@+id/info_input_birth_date"
+        android:id="@+id/info_btn_register"
+        android:text="Реєстрація"
+        android:background="#263238"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-  </android.support.design.widget.TextInputLayout>
-  <Button
-      android:layout_below="@+id/forgot_input_email"
-      android:id="@+id/forgot_btn_reset"
-      android:text="Reset Password"
-      android:background="#263238"
-      style="@style/Widget.AppCompat.Button.Colored"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content" />
-  <TextView
-      android:layout_below="@+id/forgot_btn_reset"
-      android:id="@+id/forgot_btn_back"
-      android:layout_centerHorizontal="true"
-      android:clickable="true"
-      android:text="Back"
-      android:textColor="@color/colorPrimaryDark"
-      style="@style/Widget.AppCompat.Button.Borderless"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content" />
 </RelativeLayout>

@@ -10,6 +10,7 @@ using Android.Views;
 using Android.Gms.Tasks;
 using Android.Support.Design.Widget;
 using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace RandomPlayers {
     [Activity(Label = "MainActivity", MainLauncher = false, Icon = "@drawable/icon",Theme ="@style/AppTheme")]
@@ -64,10 +65,16 @@ namespace RandomPlayers {
                        
         }
 
-        public void OnComplete(Task task)
+        public async void OnComplete(Task task)
         {
            if(task.IsSuccessful)
             {
+                var s = await FirebaseAuth.Instance.CurrentUser.GetTokenAsync(false);
+                System.Diagnostics.Debug.WriteLine(s.Token);
+
+                
+                
+
                 StartActivity(new Android.Content.Intent(this, typeof(DashBoard)));
                 
                 Finish();
@@ -78,7 +85,8 @@ namespace RandomPlayers {
                 Snackbar snackBar = Snackbar.Make(activity_main, "Login Failed ", Snackbar.LengthShort);
                 snackBar.Show();
             }
-        }
+        }        
+
     }
 }
 

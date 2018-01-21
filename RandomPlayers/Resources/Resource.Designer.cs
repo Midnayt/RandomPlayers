@@ -2534,6 +2534,9 @@ namespace RandomPlayers
 			// aapt resource value: 0x7f0a00ca
 			public const int activity_sign_up = 2131361994;
 			
+			// aapt resource value: 0x7f0a00d8
+			public const int activity_user_info = 2131362008;
+			
 			// aapt resource value: 0x7f0a0033
 			public const int add = 2131361843;
 			
@@ -2738,6 +2741,39 @@ namespace RandomPlayers
 			// aapt resource value: 0x7f0a00c4
 			public const int info = 2131361988;
 			
+			// aapt resource value: 0x7f0a00e2
+			public const int info_birth_date = 2131362018;
+			
+			// aapt resource value: 0x7f0a00e3
+			public const int info_btn_register = 2131362019;
+			
+			// aapt resource value: 0x7f0a00e0
+			public const int info_city = 2131362016;
+			
+			// aapt resource value: 0x7f0a00de
+			public const int info_country = 2131362014;
+			
+			// aapt resource value: 0x7f0a00da
+			public const int info_first_name = 2131362010;
+			
+			// aapt resource value: 0x7f0a00e1
+			public const int info_input_birth_date = 2131362017;
+			
+			// aapt resource value: 0x7f0a00df
+			public const int info_input_city = 2131362015;
+			
+			// aapt resource value: 0x7f0a00dd
+			public const int info_input_country = 2131362013;
+			
+			// aapt resource value: 0x7f0a00d9
+			public const int info_input_first_name = 2131362009;
+			
+			// aapt resource value: 0x7f0a00db
+			public const int info_input_last_name = 2131362011;
+			
+			// aapt resource value: 0x7f0a00dc
+			public const int info_last_name = 2131362012;
+			
 			// aapt resource value: 0x7f0a005f
 			public const int italic = 2131361887;
 			
@@ -2789,8 +2825,8 @@ namespace RandomPlayers
 			// aapt resource value: 0x7f0a00b2
 			public const int login_password = 2131361970;
 			
-			// aapt resource value: 0x7f0a00d9
-			public const int masked = 2131362009;
+			// aapt resource value: 0x7f0a00e5
+			public const int masked = 2131362021;
 			
 			// aapt resource value: 0x7f0a00bd
 			public const int media_actions = 2131361981;
@@ -3083,8 +3119,8 @@ namespace RandomPlayers
 			// aapt resource value: 0x7f0a0016
 			public const int view_offset_helper = 2131361814;
 			
-			// aapt resource value: 0x7f0a00d8
-			public const int visible = 2131362008;
+			// aapt resource value: 0x7f0a00e4
+			public const int visible = 2131362020;
 			
 			// aapt resource value: 0x7f0a0021
 			public const int wide = 2131361825;

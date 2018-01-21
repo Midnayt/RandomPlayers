@@ -42,7 +42,7 @@ namespace RandomPlayers {
             input_email = FindViewById<EditText>(Resource.Id.signup_email);
             input_password = FindViewById<EditText>(Resource.Id.signup_password);
             input_password_confirm = FindViewById<EditText>(Resource.Id.signup_password_confirm);
-            activity_sign_up = FindViewById<RelativeLayout>(Resource.Id.activity_sign_up);
+            activity_sign_up = FindViewById<RelativeLayout>(Resource.Id.activity_user_info);
 
             btnLogin.SetOnClickListener(this);
             btnForgotPass.SetOnClickListener(this);
@@ -58,9 +58,12 @@ namespace RandomPlayers {
                 StartActivity(new Intent(this, typeof(ForgotPassword)));
                 Finish();
             } else if (v.Id == Resource.Id.signup_btn_register) {
-                if (input_password.Text == input_password_confirm.Text)
+                if (input_password.Text == input_password_confirm.Text) {
                     SignUpUser(input_email.Text, input_password.Text);
-                else {
+                    StartActivity(new Intent(this, typeof(UserInfo)));
+
+                    Finish();
+                } else {
                     //FragmentTransaction ft = FragmentManager.BeginTransaction();
                     ////Remove fragment else it will crash as it is already added to backstack
                     //Fragment prev = FragmentManager.FindFragmentByTag("dialog");
@@ -76,8 +79,6 @@ namespace RandomPlayers {
                     //Add fragment
                     newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
                 }
-                    //AlertDialogShow("Помилка", "Паролі не співпадають");
-                
             }
         }
 
@@ -96,19 +97,7 @@ namespace RandomPlayers {
                 Snackbar snackBar = Snackbar.Make(activity_sign_up, task.Exception.Message, Snackbar.LengthShort);
                 snackBar.Show();
             }
-        }
-
-        void AlertDialogShow(string title, string message, string button = "OK") {
-            var alertDiag = new Android.App.AlertDialog.Builder(this);
-            alertDiag.SetTitle(title);
-            alertDiag.SetMessage(message);
-            alertDiag.SetPositiveButton(button, (senderAlert, args) => {
-                Toast.MakeText(this, button, ToastLength.Short).Show();
-            });
-
-            var dialog = alertDiag.Create();
-            dialog.Show();
-        }
+        }        
 
     }
 }
