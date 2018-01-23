@@ -43,10 +43,11 @@ namespace RandomPlayers {
             input_password = FindViewById<EditText>(Resource.Id.signup_password);
             input_password_confirm = FindViewById<EditText>(Resource.Id.signup_password_confirm);
             activity_sign_up = FindViewById<RelativeLayout>(Resource.Id.activity_user_info);
-
             btnLogin.SetOnClickListener(this);
             btnForgotPass.SetOnClickListener(this);
             btnSignup.SetOnClickListener(this);
+
+            
 
         }
 

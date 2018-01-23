@@ -25,19 +25,7 @@ namespace RandomPlayers.DBO {
         public bool IsDeleted {
             get { return _isDeleted; }
             set { SetProperty(ref _isDeleted, value); }
-        }
-
-        DateTime _createdAt;
-        public DateTime CreatedAt {
-            get { return _createdAt; }
-            set { SetProperty(ref _createdAt, value); }
-        }
-
-        DateTime _updateAt;
-        public DateTime UpdateAt {
-            get { return _updateAt; }
-            set { SetProperty(ref _updateAt, value); }
-        }
+        }               
         
     }
 }

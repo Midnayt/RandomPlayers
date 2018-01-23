@@ -13,19 +13,17 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 
 namespace RandomPlayers {
-    [Activity(Label = "MainActivity", MainLauncher = false, Icon = "@drawable/icon",Theme ="@style/AppTheme")]
-    public class MainActivity : AppCompatActivity,IOnClickListener,IOnCompleteListener
-    {
+    [Activity(Label = "MainActivity", MainLauncher = false, Icon = "@drawable/icon", Theme = "@style/AppTheme")]
+    public class MainActivity : AppCompatActivity, IOnClickListener, IOnCompleteListener {
         Button btnLogin;
         EditText input_email, input_password;
         TextView btnSignUp, btnForgotPassword;
 
         RelativeLayout activity_main;
-        
-        protected override void OnCreate(Bundle bundle)
-        {
+
+        protected override void OnCreate(Bundle bundle) {
             base.OnCreate(bundle);
-            SetContentView (Resource.Layout.Main);
+            SetContentView(Resource.Layout.Main);
 
             //View
             btnLogin = FindViewById<Button>(Resource.Id.login_btn_login);
@@ -40,52 +38,38 @@ namespace RandomPlayers {
             btnForgotPassword.SetOnClickListener(this);
         }
 
-        public void OnClick(View v)
-        {
-            if(v.Id == Resource.Id.login_btn_forgot_password)
-            {
+        public void OnClick(View v) {
+            if (v.Id == Resource.Id.login_btn_forgot_password) {
                 StartActivity(new Android.Content.Intent(this, typeof(ForgotPassword)));
                 Finish();
-            }
-            else if (v.Id == Resource.Id.login_btn_sign_up)
-            {
+            } else if (v.Id == Resource.Id.login_btn_sign_up) {
                 StartActivity(new Android.Content.Intent(this, typeof(SignUp)));
                 Finish();
-            }
-            else if (v.Id == Resource.Id.login_btn_login)
-            {
+            } else if (v.Id == Resource.Id.login_btn_login) {
                 LoginUser(input_email.Text, input_password.Text);
             }
         }
 
-        private async void LoginUser(string email, string password)
-        {
+        private async void LoginUser(string email, string password) {
             FirebaseAuth.Instance.SignInWithEmailAndPassword(email, password)
-                .AddOnCompleteListener(this);            
-                       
+                .AddOnCompleteListener(this);
+
         }
 
-        public async void OnComplete(Task task)
-        {
-           if(task.IsSuccessful)
-            {
+        public async void OnComplete(Task task) {
+            if (task.IsSuccessful) {
                 var s = await FirebaseAuth.Instance.CurrentUser.GetTokenAsync(false);
                 System.Diagnostics.Debug.WriteLine(s.Token);
 
-                
-                
-
                 StartActivity(new Android.Content.Intent(this, typeof(DashBoard)));
-                
+
                 Finish();
-                
-            }
-           else
-            {
+
+            } else {
                 Snackbar snackBar = Snackbar.Make(activity_main, "Login Failed ", Snackbar.LengthShort);
                 snackBar.Show();
             }
-        }        
+        }
 
     }
 }

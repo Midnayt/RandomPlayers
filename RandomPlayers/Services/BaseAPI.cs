@@ -379,13 +379,18 @@ namespace RandomPlayers.Services {
             } else {
                 httpClient.DefaultRequestHeaders.Accept.Clear();
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                var settings = new JsonSerializerSettings {
-                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                    NullValueHandling = NullValueHandling.Ignore
-                };
+                string body = "";
+                if (keys.GetType() == typeof(string))
+                    body = (string)keys;
+                else {
+                    var settings = new JsonSerializerSettings {
+                        ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                        NullValueHandling = NullValueHandling.Ignore
+                    };
 
-                var body = JsonConvert.SerializeObject(keys, Formatting.Indented, settings);
-                var response = await httpClient.PostAsync(url, new StringContent(body, Encoding.Unicode, "application/json"));
+                    body = JsonConvert.SerializeObject(keys, Formatting.Indented, settings);
+                }
+                var response = await httpClient.PostAsync(url, new StringContent(body, Encoding.UTF8, "application/json"));
                 return response;
             }
 

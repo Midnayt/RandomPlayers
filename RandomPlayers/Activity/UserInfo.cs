@@ -20,7 +20,9 @@ using static Android.Views.View;
 
 namespace RandomPlayers {
     [Activity(Label = "UserInfo", Theme = "@style/AppTheme")]
-    public class UserInfo : AppCompatActivity, IOnClickListener, IOnCompleteListener {
+    public class UserInfo : AppCompatActivity, IOnClickListener
+        //, IOnCompleteListener
+        {
 
         Button btnRegister;
         EditText input_first_name, input_last_name, input_country, input_city, input_birth_date;
@@ -51,21 +53,21 @@ namespace RandomPlayers {
         public async void OnClick(View v) {
             if (v.Id == Resource.Id.info_btn_register) {
                 CreateUser();
-
+                
+                
             }
         }
 
-        public void OnComplete(Task task) {
-            if (task.IsSuccessful == true) {
-                StartActivity(new Intent(this, typeof(MainActivity)));
-                Finish();
-                Snackbar snackBar = Snackbar.Make(activity_user_info, "Register successfully", Snackbar.LengthShort);
-                snackBar.Show();
-            } else {
-                Snackbar snackBar = Snackbar.Make(activity_user_info, task.Exception.Message, Snackbar.LengthShort);
-                snackBar.Show();
-            }
-        }
+        //public void OnComplete(Task task) {
+        //    if (task.IsSuccessful == true) {
+                
+        //        Snackbar snackBar = Snackbar.Make(activity_user_info, "Register successfully", Snackbar.LengthShort);
+        //        snackBar.Show();
+        //    } else {
+        //        Snackbar snackBar = Snackbar.Make(activity_user_info, task.Exception.Message, Snackbar.LengthShort);
+        //        snackBar.Show();
+        //    }
+        //}
 
         async void CreateUser() {
             User = new User {
@@ -79,6 +81,10 @@ namespace RandomPlayers {
 
             };
             var response = await AccountsApi.RegisterNew(User);
+            if (response.Succeed) {
+                StartActivity(new Intent(this, typeof(DashBoard)));
+                Finish();
+            }
             
 
         }
