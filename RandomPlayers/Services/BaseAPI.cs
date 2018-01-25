@@ -15,6 +15,7 @@ using Android.Views;
 using Android.Widget;
 using Firebase.Auth;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using RandomPlayers.Extentions;
 using RandomPlayers.Fragments.DialogFragments;
@@ -211,19 +212,21 @@ namespace RandomPlayers.Services {
                                     ContractResolver = new CamelCasePropertyNamesContractResolver(),
                                     NullValueHandling = NullValueHandling.Ignore
                                 };
-                                var error = JsonConvert.DeserializeObject<ErrorResponse>(responseString, settings);
+                                var token = JToken.Parse(responseString);
+                                var error = token["error"]["message"].ToString();
+                                
                                 return new ApiResponse<T> {
                                     Succeed = false,
-                                    Errors = error.Error_description,
-                                    //ErrorType = error.Error,
-                                    //StatucCode = response.StatusCode
+                                    Errors = error,
+                                    StatusCode = response.StatusCode
+                                    
                                 };
                             } catch { }
                         }
                         return new ApiResponse<T> {
                             Succeed = false,
                             Errors = "Unknow http error",
-                            //StatucCode = response.StatusCode
+                            StatusCode = response.StatusCode
                         };
                     }
 
@@ -268,17 +271,34 @@ namespace RandomPlayers.Services {
                     }
                     if (response.StatusCode == HttpStatusCode.Unauthorized) {
                         var newFragment = new MessageAlert("Паролі не співпадають");
-
+                        // TODO: make somethins
                         //Add fragment
                         //newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
                     }
 
                     var responseString = await response.Content.ReadAsStringAsync();
                     if (response.StatusCode != HttpStatusCode.OK) {
+                        if (!string.IsNullOrEmpty(responseString)) {
+                            try {
+                                var settings = new JsonSerializerSettings {
+                                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                                    NullValueHandling = NullValueHandling.Ignore
+                                };
+                                var token = JToken.Parse(responseString);
+                                var error = token["error"]["message"].ToString();
+                                //var error = JsonConvert.DeserializeObject<ErrorResponse>(responseString, settings);
+                                return new ApiResponse {
+                                    Succeed = false,
+                                    Errors = error,
+                                    StatusCode = response.StatusCode
+                                    //ErrorType = error.Error,
+                                };
+                            } catch { }
+                        }
                         return new ApiResponse {
                             Succeed = false,
-                            Errors = "",
-                            //StatucCode = response.StatusCode
+                            Errors = "Unknow http error",
+                            StatusCode = response.StatusCode
                         };
                     }
                 } catch (Exception ex) {
@@ -296,6 +316,7 @@ namespace RandomPlayers.Services {
         }
 
         protected async Task<bool> RefreshToken() {
+            var token = await FirebaseAuth.Instance.CurrentUser.GetIdTokenAsync(true);
             //var refreshToken = ""; //TODO REFRESHTOKEN
             //if (string.IsNullOrWhiteSpace(refreshToken)) {
             //    System.Diagnostics.Debug.WriteLine($"BASESERVICE: {this?.GetType()?.Name}.RefreshToken({refreshToken}): BAD REFRESH TOKEN");
@@ -317,7 +338,7 @@ namespace RandomPlayers.Services {
             //    } catch { }
             //}
             //System.Diagnostics.Debug.WriteLine($"BASESERVICE: {this?.GetType()?.Name}.RefreshToken({refreshToken}) - StatusCode not OK");
-            return false;
+            return !string.IsNullOrEmpty(token?.Token);
         }
 
         protected async Task<bool> ReLogin() {
@@ -416,10 +437,5 @@ namespace RandomPlayers.Services {
             return response;
         }
     }
-
-    internal class ErrorResponse {
-        public string Error { get; set; }
-        public string Error_description { get; set; }
-    }
-
+       
 }

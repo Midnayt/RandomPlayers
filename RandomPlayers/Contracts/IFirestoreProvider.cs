@@ -17,6 +17,9 @@ namespace RandomPlayers.Contracts {
     public interface IFirestoreProvider {
 
         Task<ApiResponse> RegisterNew(User user);
+        Task<ApiResponse<User>> GetCurentUser(User user);
+        Task<ApiResponse> UpdateCurentUser(User user);
+
 
         //Task<ApiResponse<AccessToken>> SignIn(string email, string password);
 

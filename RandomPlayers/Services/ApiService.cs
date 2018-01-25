@@ -48,5 +48,13 @@ namespace RandomPlayers.Services {
             return response;
 
         }
+        
+        public Task<ApiResponse<User>> GetCurentUser(User user) {
+            throw new NotImplementedException();
+        }
+
+        public Task<ApiResponse> UpdateCurentUser(User user) {
+            throw new NotImplementedException();
+        }
     }
 }

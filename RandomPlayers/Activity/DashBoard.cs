@@ -14,19 +14,17 @@ using Firebase.Auth;
 using static Android.Views.View;
 using Android.Gms.Tasks;
 using Android.Support.Design.Widget;
+using Java.Interop;
 
 namespace RandomPlayers {
-    [Activity(Label = "DashBoard",Theme ="@style/AppTheme")]
-    public class DashBoard : AppCompatActivity,IOnClickListener,IOnCompleteListener
-    {
+    [Activity(Label = "DashBoard", Theme = "@style/AppTheme")]
+    public class DashBoard : AppCompatActivity, IOnCompleteListener {
         TextView txtWelcome;
         EditText input_new_password;
-        Button btnChangePass, btnLogout;
         RelativeLayout activity_dashboard;
 
         FirebaseAuth auth;
-        protected override void OnCreate(Bundle savedInstanceState)
-        {
+        protected override void OnCreate(Bundle savedInstanceState) {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.DashBoard);
 
@@ -36,47 +34,49 @@ namespace RandomPlayers {
             //View
             txtWelcome = FindViewById<TextView>(Resource.Id.dashboard_welcome);
             input_new_password = FindViewById<EditText>(Resource.Id.dashboard_newpassword);
-            btnChangePass = FindViewById<Button>(Resource.Id.dashboard_btn_change_pass);
-            btnLogout = FindViewById<Button>(Resource.Id.dashboard_btn_logout);
             activity_dashboard = FindViewById<RelativeLayout>(Resource.Id.activity_dashboard);
-
-            btnChangePass.SetOnClickListener(this);
-            btnLogout.SetOnClickListener(this);
 
             //Check session
             if (auth.CurrentUser != null)
                 txtWelcome.Text = "Welcome , " + auth.CurrentUser.Email;
         }
 
-        public void OnClick(View v)
-        {
-            if (v.Id == Resource.Id.dashboard_btn_change_pass)
-                ChangePassword(input_new_password.Text);
-            else if (v.Id == Resource.Id.dashboard_btn_logout)
-                LogoutUser();
+        [Export("OnChangePasswordButtonClick")]
+        public void OnChangePasswordButtonClick(View view) {
+            var newPassword = input_new_password.Text;
+            
+            if (!string.IsNullOrEmpty(newPassword)) {
+                ChangePassword(newPassword);
+
+            } else {
+                Snackbar snackBar = Snackbar.Make(activity_dashboard, "¬вед≥ть пароль", Snackbar.LengthShort);
+                snackBar.Show();
+            }
         }
 
-        private void LogoutUser()
-        {
+        [Export("OnLogOutButtonClick")]
+        public void OnLogOutButtonClick(View view) {
+            LogoutUser();
+        }
+
+
+        private void LogoutUser() {
             auth.SignOut();
-            if(auth.CurrentUser == null)
-            {
+            if (auth.CurrentUser == null) {
                 StartActivity(new Intent(this, typeof(MainActivity)));
                 Finish();
             }
         }
 
-        private void ChangePassword(string newPassword)
-        {
+        private void ChangePassword(string newPassword) {
             FirebaseUser user = auth.CurrentUser;
             user.UpdatePassword(newPassword)
                 .AddOnCompleteListener(this);
+
         }
 
-        public void OnComplete(Task task)
-        {
-           if(task.IsSuccessful == true)
-            {
+        public void OnComplete(Task task) {
+            if (task.IsSuccessful == true) {
                 Snackbar snackBar = Snackbar.Make(activity_dashboard, "Password has been changed", Snackbar.LengthShort);
                 snackBar.Show();
             }

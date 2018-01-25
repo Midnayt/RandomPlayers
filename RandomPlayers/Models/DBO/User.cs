@@ -12,12 +12,9 @@ using Android.Widget;
 
 namespace RandomPlayers.DBO {
     public class User : BaseDBO {
-
-        string _email;
-        public string Email {
-            get {return _email; }
-            set {SetProperty(ref _email, value); }
-        }
+                
+        public string Email { get; set; }
+        
 
         string _firstName;
         public string FirstName {

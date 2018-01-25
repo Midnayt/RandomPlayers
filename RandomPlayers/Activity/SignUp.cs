@@ -16,89 +16,86 @@ using Android.Gms.Tasks;
 using Android.Support.Design.Widget;
 using Firebase;
 using RandomPlayers.Fragments.DialogFragments;
+using Java.Interop;
 
 namespace RandomPlayers {
     [Activity(Label = "SignUp", Theme = "@style/AppTheme")]
-    public class SignUp : AppCompatActivity, IOnClickListener, IOnCompleteListener {
+    public class SignUp : AppCompatActivity {
 
-        Button btnSignup;
-        TextView btnLogin, btnForgotPass;
+        ProgressBar progressBar;
         EditText input_email, input_password, input_password_confirm;
         RelativeLayout activity_sign_up;
-
 
 
         protected override void OnCreate(Bundle savedInstanceState) {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.SignUp);
 
-            //InitFirebase
-
-
-            //View
-            btnSignup = FindViewById<Button>(Resource.Id.signup_btn_register);
-            btnLogin = FindViewById<TextView>(Resource.Id.signup_btn_login);
-            btnForgotPass = FindViewById<TextView>(Resource.Id.signup_btn_forgot_password);
+            progressBar = (ProgressBar)FindViewById(Resource.Id.LoadingProgressBar);
             input_email = FindViewById<EditText>(Resource.Id.signup_email);
             input_password = FindViewById<EditText>(Resource.Id.signup_password);
             input_password_confirm = FindViewById<EditText>(Resource.Id.signup_password_confirm);
             activity_sign_up = FindViewById<RelativeLayout>(Resource.Id.activity_user_info);
-            btnLogin.SetOnClickListener(this);
-            btnForgotPass.SetOnClickListener(this);
-            btnSignup.SetOnClickListener(this);
-
-            
 
         }
 
-        public void OnClick(View v) {
-            if (v.Id == Resource.Id.signup_btn_login) {
-                StartActivity(new Intent(this, typeof(MainActivity)));
-                Finish();
-            } else if (v.Id == Resource.Id.signup_btn_forgot_password) {
-                StartActivity(new Intent(this, typeof(ForgotPassword)));
-                Finish();
-            } else if (v.Id == Resource.Id.signup_btn_register) {
-                if (input_password.Text == input_password_confirm.Text) {
-                    SignUpUser(input_email.Text, input_password.Text);
-                    StartActivity(new Intent(this, typeof(UserInfo)));
-
-                    Finish();
-                } else {
-                    //FragmentTransaction ft = FragmentManager.BeginTransaction();
-                    ////Remove fragment else it will crash as it is already added to backstack
-                    //Fragment prev = FragmentManager.FindFragmentByTag("dialog");
-                    //if (prev != null) {
-                    //    ft.Remove(prev);
-                    //}
-
-                    //ft.AddToBackStack(null);
-
-                    // Create and show the dialog.
-                    var newFragment = new MessageAlert("Паролі не співпадають");
-
-                    //Add fragment
-                    newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
-                }
-            }
+        [Export("OnForgotPasswordTextClick")]
+        public void OnForgotPasswordTextClick(View view) {
+            StartActivity(new Intent(this, typeof(ForgotPassword)));
+            Finish();
         }
 
-
-        private void SignUpUser(string email, string password) {
-            FirebaseAuth.Instance.CreateUserWithEmailAndPassword(email, password)
-                .AddOnCompleteListener(this, this);
-
+        [Export("OnLoginTextClick")]
+        public void OnLoginTextClick(View view) {
+            StartActivity(new Intent(this, typeof(MainActivity)));
+            Finish();
         }
 
-        public void OnComplete(Task task) {
-            if (task.IsSuccessful == true) {
-                Snackbar snackBar = Snackbar.Make(activity_sign_up, "Register successfully", Snackbar.LengthShort);
-                snackBar.Show();
+        [Export("OnRegisterButtonClick")]
+        public void OnRegisterButtonClick(View view) {
+            if (input_password.Text == input_password_confirm.Text) {
+                SignUpUser(input_email.Text, input_password.Text);
+
+
             } else {
-                Snackbar snackBar = Snackbar.Make(activity_sign_up, task.Exception.Message, Snackbar.LengthShort);
-                snackBar.Show();
+                //FragmentTransaction ft = FragmentManager.BeginTransaction();
+                ////Remove fragment else it will crash as it is already added to backstack
+                //Fragment prev = FragmentManager.FindFragmentByTag("dialog");
+                //if (prev != null) {
+                //    ft.Remove(prev);
+                //}
+
+                //ft.AddToBackStack(null);
+
+                // Create and show the dialog.
+                var newFragment = new MessageAlert("Паролі не співпадають");
+
+                //Add fragment
+                newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
             }
-        }        
+        }
+
+
+        private async void SignUpUser(string email, string password) {
+            progressBar.Visibility = ViewStates.Visible;
+            try {
+                var user = await FirebaseAuth.Instance.CreateUserWithEmailAndPasswordAsync(email, password);
+
+                if (user != null) {
+
+                    StartActivity(new Intent(this, typeof(UserInfo)));
+                    Finish();
+                }
+            } catch (Exception ex) {
+                var newFragment = new MessageAlert(ex.Message);
+
+                //Add fragment
+                newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
+            }
+            //FirebaseAuth.Instance.CreateUserWithEmailAndPassword(email, password).AddOnCompleteListener(this, this);
+            progressBar.Visibility = ViewStates.Gone;
+
+        }
 
     }
 }

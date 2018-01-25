@@ -57,7 +57,9 @@
         android:background="#263238"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:onClick="OnRegisterButtonClick"
+        android:clickable="true" />
     <TextView
         android:layout_below="@+id/signup_btn_register"
         android:id="@+id/signup_btn_forgot_password"
@@ -68,7 +70,8 @@
         android:textColor="@color/colorPrimaryDark"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:onClick="OnForgotPasswordTextClick" />
     <LinearLayout
         android:layout_below="@+id/signup_btn_forgot_password"
         android:id="@+id/signup_layout_or"
@@ -102,5 +105,19 @@
         android:textColor="@color/colorPrimaryDark"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:onClick="OnLoginTextClick" />
+  <ProgressBar
+        android:visibility="invisible"
+        android:id="@+id/LoadingProgressBar"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/design_fab_shadow_start_color"
+        android:clickable="false"
+        android:indeterminate="true"
+        android:paddingBottom="100dp"
+        android:paddingEnd="100dp"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp" />
 </RelativeLayout>

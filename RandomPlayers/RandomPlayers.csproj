@@ -57,6 +57,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Mono.Android.Export" />
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1-beta3\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -173,8 +174,8 @@
     <Compile Include="Activity\SplashScreen.cs" />
     <Compile Include="Activity\UserInfo.cs" />
     <Compile Include="Contracts\IFirestoreProvider.cs" />
-    <Compile Include="LocalProvider\DBO\BaseDBO.cs" />
-    <Compile Include="LocalProvider\DBO\User.cs" />
+    <Compile Include="Models\DBO\BaseDBO.cs" />
+    <Compile Include="Models\DBO\User.cs" />
     <Compile Include="Extentions\ApiResponse.cs" />
     <Compile Include="Extentions\KeysJsonConverter.cs" />
     <Compile Include="Extentions\NotifyPropertyChanged.cs" />
@@ -184,6 +185,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ApiService.cs" />
     <Compile Include="Services\BaseAPI.cs" />
+    <Compile Include="Services\LocalProviderService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -203,6 +205,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\dialogFragment_MessageAlert.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\dialogFragment_ProgressBar.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

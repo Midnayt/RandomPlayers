@@ -11,6 +11,9 @@ using Android.Views;
 using Android.Widget;
 
 namespace RandomPlayers.Services {
-    class LocalProviderService {
+    public  class LocalProviderService {
+
+
+
     }
 }

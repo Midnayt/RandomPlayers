@@ -11,14 +11,15 @@ using Android.Gms.Tasks;
 using Android.Support.Design.Widget;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using Java.Interop;
+using RandomPlayers.Fragments.DialogFragments;
 
 namespace RandomPlayers {
     [Activity(Label = "MainActivity", MainLauncher = false, Icon = "@drawable/icon", Theme = "@style/AppTheme")]
-    public class MainActivity : AppCompatActivity, IOnClickListener, IOnCompleteListener {
-        Button btnLogin;
-        EditText input_email, input_password;
-        TextView btnSignUp, btnForgotPassword;
+    public class MainActivity : AppCompatActivity {
 
+        ProgressBar progressBar;
+        EditText input_email, input_password;
         RelativeLayout activity_main;
 
         protected override void OnCreate(Bundle bundle) {
@@ -26,49 +27,52 @@ namespace RandomPlayers {
             SetContentView(Resource.Layout.Main);
 
             //View
-            btnLogin = FindViewById<Button>(Resource.Id.login_btn_login);
+            progressBar = FindViewById<ProgressBar>(Resource.Id.LoadingProgressBar);
             input_email = FindViewById<EditText>(Resource.Id.login_email);
             input_password = FindViewById<EditText>(Resource.Id.login_password);
-            btnSignUp = FindViewById<TextView>(Resource.Id.login_btn_sign_up);
-            btnForgotPassword = FindViewById<TextView>(Resource.Id.login_btn_forgot_password);
             activity_main = FindViewById<RelativeLayout>(Resource.Id.activity_main);
 
-            btnSignUp.SetOnClickListener(this);
-            btnLogin.SetOnClickListener(this);
-            btnForgotPassword.SetOnClickListener(this);
+
         }
 
-        public void OnClick(View v) {
-            if (v.Id == Resource.Id.login_btn_forgot_password) {
-                StartActivity(new Android.Content.Intent(this, typeof(ForgotPassword)));
-                Finish();
-            } else if (v.Id == Resource.Id.login_btn_sign_up) {
-                StartActivity(new Android.Content.Intent(this, typeof(SignUp)));
-                Finish();
-            } else if (v.Id == Resource.Id.login_btn_login) {
-                LoginUser(input_email.Text, input_password.Text);
-            }
+        [Export("OnLoginButtonClick")]
+        public void OnLoginButtonClick(View view) {
+            LoginUser(input_email.Text, input_password.Text);
+
         }
+
+        [Export("OnForgotPasswordTextClick")]
+        public void OnForgotPasswordTextClick(View view) {
+            StartActivity(new Android.Content.Intent(this, typeof(ForgotPassword)));
+            Finish();
+        }
+
+        [Export("OnSignUpTextClick")]
+        public void OnSignUpTextClick(View view) {
+            StartActivity(new Android.Content.Intent(this, typeof(SignUp)));
+            Finish();
+        }
+
 
         private async void LoginUser(string email, string password) {
-            FirebaseAuth.Instance.SignInWithEmailAndPassword(email, password)
-                .AddOnCompleteListener(this);
+            progressBar.Visibility = ViewStates.Visible;
+            try {
+                var user = await FirebaseAuth.Instance.SignInWithEmailAndPasswordAsync(email, password);
 
-        }
+                if (user != null) {
 
-        public async void OnComplete(Task task) {
-            if (task.IsSuccessful) {
-                var s = await FirebaseAuth.Instance.CurrentUser.GetTokenAsync(false);
-                System.Diagnostics.Debug.WriteLine(s.Token);
+                    StartActivity(new Android.Content.Intent(this, typeof(DashBoard)));
+                    Finish();
 
-                StartActivity(new Android.Content.Intent(this, typeof(DashBoard)));
-
-                Finish();
-
-            } else {
-                Snackbar snackBar = Snackbar.Make(activity_main, "Login Failed ", Snackbar.LengthShort);
-                snackBar.Show();
-            }
+                } else {
+                    var newFragment = new MessageAlert("Немає достуду до користувача");
+                    newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
+                }
+            } catch (Exception ex) {
+                var newFragment = new MessageAlert(ex.Message);
+                newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
+            };
+            progressBar.Visibility = ViewStates.Gone;
         }
 
     }

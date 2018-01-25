@@ -13,6 +13,7 @@ using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
 using Firebase.Auth;
+using Java.Interop;
 using RandomPlayers.Contracts;
 using RandomPlayers.DBO;
 using RandomPlayers.Services;
@@ -20,11 +21,11 @@ using static Android.Views.View;
 
 namespace RandomPlayers {
     [Activity(Label = "UserInfo", Theme = "@style/AppTheme")]
-    public class UserInfo : AppCompatActivity, IOnClickListener
+    public class UserInfo : AppCompatActivity
         //, IOnCompleteListener
         {
 
-        Button btnRegister;
+
         EditText input_first_name, input_last_name, input_country, input_city, input_birth_date;
         RelativeLayout activity_user_info;
         FirebaseAuth auth;
@@ -36,8 +37,7 @@ namespace RandomPlayers {
             SetContentView(Resource.Layout.UserInfo);
 
             auth = FirebaseAuth.Instance;
-
-            btnRegister = FindViewById<Button>(Resource.Id.info_btn_register);
+                
             input_first_name = FindViewById<EditText>(Resource.Id.info_first_name);
             input_last_name = FindViewById<EditText>(Resource.Id.info_last_name);
             input_country = FindViewById<EditText>(Resource.Id.info_country);
@@ -45,22 +45,17 @@ namespace RandomPlayers {
             input_birth_date = FindViewById<EditText>(Resource.Id.info_birth_date);
             activity_user_info = FindViewById<RelativeLayout>(Resource.Id.activity_user_info);
 
-
-            btnRegister.SetOnClickListener(this);
             AccountsApi = new ApiService();
         }
 
-        public async void OnClick(View v) {
-            if (v.Id == Resource.Id.info_btn_register) {
-                CreateUser();
-                
-                
-            }
+        [Export("OnRegisterButtonClick")]
+        public void OnRegisterButtonClick(View v) {
+            CreateUser();
         }
 
         //public void OnComplete(Task task) {
         //    if (task.IsSuccessful == true) {
-                
+
         //        Snackbar snackBar = Snackbar.Make(activity_user_info, "Register successfully", Snackbar.LengthShort);
         //        snackBar.Show();
         //    } else {
@@ -85,7 +80,7 @@ namespace RandomPlayers {
                 StartActivity(new Intent(this, typeof(DashBoard)));
                 Finish();
             }
-            
+
 
         }
 
