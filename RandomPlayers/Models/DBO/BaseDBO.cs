@@ -14,34 +14,20 @@ using RandomPlayers.Extentions;
 using SQLite;
 
 namespace RandomPlayers.DBO {
-    public class BaseDBO : NotifyPropertyChanged {
+    public class BaseDBO {
 
-        string _id;
-        [PrimaryKey]
-        public string Id {
-            get { return _id; }
-            set { SetProperty(ref _id, value); }
-        }
+        public string Id { get; set; }
 
-        DateTime _createdAt;
         [JsonIgnore]
-        DateTime CreatedAt {
-            get { return _createdAt; }
-            set { SetProperty(ref _createdAt, value); }
-        }
+        public string Name { get; set; }
 
-        DateTime _updatedAt;
         [JsonIgnore]
-        DateTime UpdatedAt {
-            get { return _updatedAt; }
-            set { SetProperty(ref _updatedAt, value); }
-        }
+        public DateTime CreatedAt { get; set; }
 
-        bool _isDeleted;
-        public bool IsDeleted {
-            get { return _isDeleted; }
-            set { SetProperty(ref _isDeleted, value); }
-        }               
-        
+        [JsonIgnore]
+        public DateTime UpdatedAt { get; set; }
+
+        public bool IsDeleted { get; set; }
+
     }
 }

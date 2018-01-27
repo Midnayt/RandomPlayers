@@ -17,6 +17,7 @@ using Firebase.Auth;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
+using RandomPlayers.DBO;
 using RandomPlayers.Extentions;
 using RandomPlayers.Fragments.DialogFragments;
 
@@ -106,7 +107,7 @@ namespace RandomPlayers.Services {
                         return new ApiResponse {
                             Succeed = false,
                             Errors = "ERROR",
-                            //StatusCode = response.StatusCode
+                            StatusCode = response.StatusCode
                         };
                     }
                     str = await response.Content.ReadAsStringAsync();
@@ -122,10 +123,11 @@ namespace RandomPlayers.Services {
 
             return new ApiResponse {
                 Succeed = true,
+                ResponseStr = str,
             };
         }
 
-        protected async Task<ApiResponse<T>> GetAsync<T>(string url) where T : new() {
+        protected async Task<ApiResponse<T>> GetAsync<T>(string url) where T : BaseDBO, new() {
             string str;
             T resultObject;
 
@@ -158,7 +160,7 @@ namespace RandomPlayers.Services {
                         };
                     }
                     str = await response.Content.ReadAsStringAsync();
-                    resultObject = JsonConvert.DeserializeObject<T>(str);
+                    resultObject = ConvertToBaseObject<T>(str);
                 } catch (JsonReaderException ex) {
                     System.Diagnostics.Debug.WriteLine($"{this.GetType().Name}: GatAsync<{typeof(T).Name}>: Exception: {ex.Message}");
                     return new ApiResponse<T> {
@@ -181,7 +183,7 @@ namespace RandomPlayers.Services {
             };
         }
 
-        protected async Task<ApiResponse<T>> PostAsync<T>(string url, object keys) where T : new() {
+        protected async Task<ApiResponse<T>> PostAsync<T>(string url, object keys) where T : BaseDBO, new() {
             ApiResponse<T> result;
             var t = await CheckUrl(AuthUrl);
             System.Diagnostics.Debug.WriteLine($"BASESERVICE: {GetType().Name}.PostAsync<{typeof(T).Name}>({url}, {keys.GetType().Name})");
@@ -230,15 +232,9 @@ namespace RandomPlayers.Services {
                         };
                     }
 
-                    try {
-                        if (typeof(T) == typeof(Guid)) {
-                            if (Guid.TryParse(responseString, out Guid guid))
-                                responseString = JsonConvert.SerializeObject(guid);
-                        }
-                    } catch { }
                     result = new ApiResponse<T>() {
                         Succeed = true,
-                        ResponseObject = JsonConvert.DeserializeObject<T>(responseString)
+                        ResponseObject = ConvertToBaseObject<T>(responseString)
                     };
                 } catch (JsonReaderException ex) {
                     System.Diagnostics.Debug.WriteLine($"{this.GetType().Name}: GatAsync<{typeof(T).Name}>: Exception: {ex.Message}");
@@ -435,6 +431,17 @@ namespace RandomPlayers.Services {
             }
             var response = await client.PostAsync(url, content);
             return response;
+        }
+
+        public static T ConvertToBaseObject<T>(string jsonString) where T : BaseDBO, new() {
+
+            var jobj = JObject.Parse(jsonString);
+            var t = jobj["fields"].ToString();
+            var ret = JsonConvert.DeserializeObject<T>(t, new KeysJsonConverter(typeof(T)));
+            ret.Name = jobj["name"].ToObject<string>();
+            ret.CreatedAt = jobj["createTime"].ToObject<DateTime>();
+            ret.UpdatedAt = jobj["updateTime"].ToObject<DateTime>();
+            return ret;
         }
     }
        

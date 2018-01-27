@@ -15,14 +15,18 @@ using static Android.Views.View;
 using Android.Gms.Tasks;
 using Android.Support.Design.Widget;
 using Java.Interop;
+using RandomPlayers.DBO;
+using RandomPlayers.Contracts;
+using RandomPlayers.Services;
 
 namespace RandomPlayers {
     [Activity(Label = "DashBoard", Theme = "@style/AppTheme")]
     public class DashBoard : AppCompatActivity, IOnCompleteListener {
-        TextView txtWelcome;
+        TextView txtWelcome, firstName, lastName, City, Country, birthDate;
         EditText input_new_password;
         RelativeLayout activity_dashboard;
 
+        IFirestoreProvider AccountsApi;
         FirebaseAuth auth;
         protected override void OnCreate(Bundle savedInstanceState) {
             base.OnCreate(savedInstanceState);
@@ -33,12 +37,19 @@ namespace RandomPlayers {
 
             //View
             txtWelcome = FindViewById<TextView>(Resource.Id.dashboard_welcome);
+            firstName = FindViewById<TextView>(Resource.Id.dashboard_FirstName);
+            lastName = FindViewById<TextView>(Resource.Id.dashboard_LastName);
+            City = FindViewById<TextView>(Resource.Id.dashboard_City);
+            Country = FindViewById<TextView>(Resource.Id.dashboard_Country);
+            birthDate = FindViewById<TextView>(Resource.Id.dashboard_BirthDate);
             input_new_password = FindViewById<EditText>(Resource.Id.dashboard_newpassword);
             activity_dashboard = FindViewById<RelativeLayout>(Resource.Id.activity_dashboard);
 
             //Check session
-            if (auth.CurrentUser != null)
-                txtWelcome.Text = "Welcome , " + auth.CurrentUser.Email;
+            //if (auth.CurrentUser != null)
+                
+            AccountsApi = new ApiService();
+            GetUser();
         }
 
         [Export("OnChangePasswordButtonClick")]
@@ -81,5 +92,25 @@ namespace RandomPlayers {
                 snackBar.Show();
             }
         }
+
+        async void GetUser() {
+            try {
+                var response = await AccountsApi.GetCurentUser();
+                var user = response.ResponseObject;
+                using(var p = new Handler(Looper.MainLooper)) {
+                    p.Post(() => {
+                        txtWelcome.Text = "Welcome , " + user.Email;
+                        firstName.Text = user.FirstName;
+                        lastName.Text = user.LastName;
+                        City.Text = user.City;
+                        Country.Text = user.Country;
+                        activity_dashboard.Invalidate();
+
+                    });
+                }
+                //birthDate.Text = user.DateOfBirth.ToString();
+            } catch (Exception ex) { }
+        }
+
     }
 }

@@ -12,45 +12,14 @@ using Android.Widget;
 
 namespace RandomPlayers.DBO {
     public class User : BaseDBO {
-                
+
         public string Email { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+        public string Image { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
         
-
-        string _firstName;
-        public string FirstName {
-            get { return _firstName; }
-            set { SetProperty(ref _firstName, value); }
-        }
-
-        string _lastName;
-        public string LastName {
-            get { return _lastName; }
-            set { SetProperty(ref _lastName, value); }
-        }
-
-        DateTime? _dateOfBirth;
-        public DateTime? DateOfBirth {
-            get { return _dateOfBirth; }
-            set { SetProperty(ref _dateOfBirth, value); }
-        }
-
-        string _image;
-        public string Image {
-            get { return _image; }
-            set { SetProperty(ref _image, value); }
-        }
-
-        string _city;
-        public string City {
-            get { return _city; }
-            set { SetProperty(ref _city, value); }
-        }
-
-        string _country;
-        public string Country {
-            get { return _country; }
-            set { SetProperty(ref _country, value); }
-        }
-                
     }
 }

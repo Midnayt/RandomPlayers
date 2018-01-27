@@ -12,6 +12,7 @@ using Android.Widget;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
+using RandomPlayers.DBO;
 
 namespace RandomPlayers.Extentions {
     public class KeysJsonConverter : JsonConverter {
@@ -24,15 +25,14 @@ namespace RandomPlayers.Extentions {
             _types = types;
         }
 
+
+
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) {
             var tt = JsonSerializer.CreateDefault();
             tt.NullValueHandling = NullValueHandling.Ignore;
             tt.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
-
             JToken t = JToken.FromObject(value, tt);
-
-            //t = RemoveEmptyChildren(t);
 
             if (t.Type != JTokenType.Object) {
                 t.WriteTo(writer);
@@ -41,46 +41,19 @@ namespace RandomPlayers.Extentions {
                 var toRemoveKeys = new List<string>();
 
                 foreach (var ob in o) {
-                    if (ob.Value.Type == JTokenType.Null) {
-                        toRemoveKeys.Add(ob.Key);
-                    } else {
+                    switch (ob.Value.Type) {
 
-                        if (ob.Value.Type == JTokenType.String) {
-                            var k = new { stringValue = ob.Value };
-                            o[ob.Key] = JToken.FromObject(k);
-                        } else {
-
-                            if (ob.Value.Type == JTokenType.Integer) {
-                                var k = new { integerValue = ob.Value };
-                                o[ob.Key] = JToken.FromObject(k);
-                            } else {
-
-                                if (ob.Value.Type == JTokenType.Boolean) {
-                                    var k = new { booleanValue = ob.Value };
-                                    o[ob.Key] = JToken.FromObject(k);
-                                } else {
-
-                                    if (ob.Value.Type == JTokenType.Object) {
-                                        var k = new { mapValue = ob.Value };
-                                        o[ob.Key] = JToken.FromObject(k);
-                                    } else {
-                                        if (ob.Value.Type == JTokenType.Array) {
-                                            var k = new { arrayValue = ob.Value };
-                                            o[ob.Key] = JToken.FromObject(k);
-                                        } else {
-                                            if (ob.Value.Type == JTokenType.Date) {
-                                                var k = new { timestampValue = ob.Value };
-                                                o[ob.Key] = JToken.FromObject(k);
-                                            }
-
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        case JTokenType.Object: o[ob.Key] = JToken.FromObject(new { mapValue = ob.Value }); break;
+                        case JTokenType.Array: o[ob.Key] = JToken.FromObject(new { arrayValue = ob.Value }); break;
+                        case JTokenType.Integer: o[ob.Key] = JToken.FromObject(new { integerValue = ob.Value }); break;
+                        case JTokenType.String: o[ob.Key] = JToken.FromObject(new { stringValue = ob.Value }); break;
+                        case JTokenType.Boolean: o[ob.Key] = JToken.FromObject(new { booleanValue = ob.Value }); break;
+                        case JTokenType.Null: toRemoveKeys.Add(ob.Key); break;
+                        case JTokenType.Date: o[ob.Key] = JToken.FromObject(new { timestampValue = ob.Value }); break;
+                        default: break;
                     }
-                }
 
+                }
                 foreach (var key in toRemoveKeys) {
                     o.Remove(key);
                 }
@@ -88,16 +61,29 @@ namespace RandomPlayers.Extentions {
                 o.WriteTo(writer);
             }
         }
-            
-        
+
+
 
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) {
-            throw new NotImplementedException("Unnecessary because CanRead is false. The type will skip the converter.");
+
+            var jObject = JObject.Load(reader);
+
+            foreach (var child in jObject) {
+                var valueType = JObject.FromObject(child.Value);
+                var res = child.Value.First.ToObject<string>();
+                jObject[child.Key] = res;
+            }
+
+            var target = Activator.CreateInstance(objectType);
+            serializer.Populate(jObject.CreateReader(), target);
+
+            return target;
+
         }
 
         public override bool CanRead {
-            get { return false; }
+            get { return true; }
         }
 
         public override bool CanConvert(Type objectType) {
@@ -136,7 +122,7 @@ namespace RandomPlayers.Extentions {
         public static bool IsEmpty(JToken token) {
             return (token.Type == JTokenType.Null);
         }
-        
+
 
     }
 }
