@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_dashboard"
     android:padding="16dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fff0ffff">
     <ImageView
         android:id="@+id/icon"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:background="@drawable/firebase"
         android:layout_width="100dp"
-        android:layout_height="100dp" />
+        android:layout_height="100dp"
+        android:layout_gravity="center" />
     <TextView
-        android:layout_below="@+id/icon"
         android:id="@+id/dashboard_welcome"
         android:layout_centerHorizontal="true"
         android:textColor="@color/colorPrimaryDark"
@@ -21,7 +21,6 @@
         android:layout_height="wrap_content"
         android:text="" />
     <TextView
-        android:layout_below="@+id/dashboard_welcome"
         android:id="@+id/dashboard_FirstName"
         android:layout_centerHorizontal="true"
         android:textColor="@color/colorPrimaryDark"
@@ -30,43 +29,34 @@
         android:layout_height="wrap_content"
         android:text="" />
     <TextView
-        android:layout_below="@+id/dashboard_FirstName"
         android:id="@+id/dashboard_LastName"
         android:layout_centerHorizontal="true"
         android:textColor="@color/colorPrimaryDark"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1" />
+        android:layout_height="wrap_content" />
     <TextView
-        android:layout_below="@+id/dashboard_LastName"
         android:id="@+id/dashboard_Country"
         android:layout_centerHorizontal="true"
         android:textColor="@color/colorPrimaryDark"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1" />
+        android:layout_height="wrap_content" />
     <TextView
-        android:layout_below="@+id/dashboard_Country"
         android:id="@+id/dashboard_City"
         android:layout_centerHorizontal="true"
         android:textColor="@color/colorPrimaryDark"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1" />
+        android:layout_height="wrap_content" />
     <TextView
-        android:layout_below="@+id/dashboard_city"
         android:id="@+id/dashboard_BirthDate"
         android:layout_centerHorizontal="true"
         android:textColor="@color/colorPrimaryDark"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="" />
+        android:layout_height="wrap_content" />
     <android.support.design.widget.TextInputLayout
-        android:layout_below="@+id/dashboard_BirthDate"
         android:id="@+id/dashboard_input_newpassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -79,7 +69,6 @@
             android:layout_height="wrap_content" />
     </android.support.design.widget.TextInputLayout>
     <Button
-        android:layout_below="@+id/dashboard_input_newpassword"
         android:id="@+id/dashboard_btn_change_pass"
         android:text="Change Password"
         android:background="#263238"
@@ -90,7 +79,6 @@
         android:onClick="OnChangePasswordButtonClick" />
     <Button
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/dashboard_btn_change_pass"
         android:id="@+id/dashboard_btn_logout"
         android:text="Logout"
         android:background="#263238"
@@ -98,4 +86,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="OnLogOutButtonClick" />
-</RelativeLayout>
+</LinearLayout>

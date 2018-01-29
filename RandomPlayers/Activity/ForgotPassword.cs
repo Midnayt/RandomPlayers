@@ -44,7 +44,7 @@ namespace RandomPlayers {
 
         public void OnClick(View v) {
             if (v.Id == Resource.Id.forgot_btn_back) {
-                StartActivity(new Intent(this, typeof(MainActivity)));
+                StartActivity(new Intent(this, typeof(Login)));
                 Finish();
             } else if (v.Id == Resource.Id.forgot_btn_reset) {
                 ResetPassword(input_email.Text);

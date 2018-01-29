@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -16,20 +17,20 @@ using Firebase.Auth;
 using Java.Interop;
 using RandomPlayers.Contracts;
 using RandomPlayers.DBO;
+using RandomPlayers.Fragments;
 using RandomPlayers.Services;
 using static Android.Views.View;
 
 namespace RandomPlayers {
     [Activity(Label = "UserInfo", Theme = "@style/AppTheme")]
-    public class UserInfo : AppCompatActivity
-        //, IOnCompleteListener
-        {
+    public class UserInfo : AppCompatActivity {
 
 
         EditText input_first_name, input_last_name, input_country, input_city, input_birth_date;
         RelativeLayout activity_user_info;
         FirebaseAuth auth;
         User User;
+        string dateOfBirth;
         IFirestoreProvider AccountsApi;
 
         protected override void OnCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ namespace RandomPlayers {
             SetContentView(Resource.Layout.UserInfo);
 
             auth = FirebaseAuth.Instance;
-                
+
             input_first_name = FindViewById<EditText>(Resource.Id.info_first_name);
             input_last_name = FindViewById<EditText>(Resource.Id.info_last_name);
             input_country = FindViewById<EditText>(Resource.Id.info_country);
@@ -53,16 +54,15 @@ namespace RandomPlayers {
             CreateUser();
         }
 
-        //public void OnComplete(Task task) {
-        //    if (task.IsSuccessful == true) {
+        [Export("birthDateTextClick")]
+        public void birthDateTextClick(View v) {
+            var frag = DatePickerFragment.NewInstance(delegate (DateTime time) {
+                input_birth_date.Text = time.ToLongDateString();
+                dateOfBirth = time.ToString("yyyy-MM-ddThh:mm:ss.000Z");
+            });
 
-        //        Snackbar snackBar = Snackbar.Make(activity_user_info, "Register successfully", Snackbar.LengthShort);
-        //        snackBar.Show();
-        //    } else {
-        //        Snackbar snackBar = Snackbar.Make(activity_user_info, task.Exception.Message, Snackbar.LengthShort);
-        //        snackBar.Show();
-        //    }
-        //}
+            frag.Show(FragmentManager, DatePickerFragment.TAG);
+        }
 
         async void CreateUser() {
             User = new User {
@@ -72,7 +72,7 @@ namespace RandomPlayers {
                 LastName = input_last_name.Text,
                 Country = input_country.Text,
                 City = input_city.Text,
-                //DateOfBirth = DateTime.Parse(input_birth_date.Text),
+                DateOfBirth = DateTime.ParseExact(dateOfBirth, "yyyy-MM-ddThh:mm:ss.000Z", CultureInfo.InvariantCulture)
 
             };
             var response = await AccountsApi.RegisterNew(User);

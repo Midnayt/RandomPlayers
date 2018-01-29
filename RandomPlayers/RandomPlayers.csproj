@@ -169,11 +169,12 @@
   <ItemGroup>
     <Compile Include="Activity\DashBoard.cs" />
     <Compile Include="Activity\ForgotPassword.cs" />
-    <Compile Include="Activity\MainActivity.cs" />
+    <Compile Include="Activity\Login.cs" />
     <Compile Include="Activity\SignUp.cs" />
     <Compile Include="Activity\SplashScreen.cs" />
     <Compile Include="Activity\UserInfo.cs" />
     <Compile Include="Contracts\IFirestoreProvider.cs" />
+    <Compile Include="Fragments\DatePickerFragment.cs" />
     <Compile Include="Models\DBO\BaseDBO.cs" />
     <Compile Include="Models\DBO\User.cs" />
     <Compile Include="Extentions\ApiResponse.cs" />
@@ -208,6 +209,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\dialogFragment_ProgressBar.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Login.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

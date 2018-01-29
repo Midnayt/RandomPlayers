@@ -49,7 +49,7 @@ namespace RandomPlayers {
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e) {
             
-            StartActivity(new Intent(this,typeof(MainActivity)));
+            StartActivity(new Intent(this,typeof(Login)));
         }
 
         byte[] ConvertFileToByteArray(Stream input) {

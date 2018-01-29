@@ -24,7 +24,7 @@ namespace RandomPlayers {
     public class DashBoard : AppCompatActivity, IOnCompleteListener {
         TextView txtWelcome, firstName, lastName, City, Country, birthDate;
         EditText input_new_password;
-        RelativeLayout activity_dashboard;
+        LinearLayout activity_dashboard;
 
         IFirestoreProvider AccountsApi;
         FirebaseAuth auth;
@@ -43,7 +43,7 @@ namespace RandomPlayers {
             Country = FindViewById<TextView>(Resource.Id.dashboard_Country);
             birthDate = FindViewById<TextView>(Resource.Id.dashboard_BirthDate);
             input_new_password = FindViewById<EditText>(Resource.Id.dashboard_newpassword);
-            activity_dashboard = FindViewById<RelativeLayout>(Resource.Id.activity_dashboard);
+            activity_dashboard = FindViewById<LinearLayout>(Resource.Id.activity_dashboard);
 
             //Check session
             //if (auth.CurrentUser != null)
@@ -74,7 +74,7 @@ namespace RandomPlayers {
         private void LogoutUser() {
             auth.SignOut();
             if (auth.CurrentUser == null) {
-                StartActivity(new Intent(this, typeof(MainActivity)));
+                StartActivity(new Intent(this, typeof(Login)));
                 Finish();
             }
         }
@@ -104,11 +104,11 @@ namespace RandomPlayers {
                         lastName.Text = user.LastName;
                         City.Text = user.City;
                         Country.Text = user.Country;
+                        birthDate.Text = user.DateOfBirth.ToString();
                         activity_dashboard.Invalidate();
 
                     });
-                }
-                //birthDate.Text = user.DateOfBirth.ToString();
+                }                
             } catch (Exception ex) { }
         }
 

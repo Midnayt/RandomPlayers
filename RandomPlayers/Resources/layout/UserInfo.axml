@@ -76,6 +76,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </android.support.design.widget.TextInputLayout>
+    <ImageView
+        android:id="@+id/icon"
+        android:background="@drawable/firebase"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:clickable="true"
+        android:onClick="birthDateTextClick"
+        android:layout_alignParentLeft="@+id/info_input_birth_date" />
     <Button
         android:layout_below="@+id/info_input_birth_date"
         android:id="@+id/info_btn_register"

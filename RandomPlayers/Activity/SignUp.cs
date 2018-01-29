@@ -47,7 +47,7 @@ namespace RandomPlayers {
 
         [Export("OnLoginTextClick")]
         public void OnLoginTextClick(View view) {
-            StartActivity(new Intent(this, typeof(MainActivity)));
+            StartActivity(new Intent(this, typeof(Login)));
             Finish();
         }
 
