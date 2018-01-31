@@ -13,6 +13,7 @@ using Android.Support.Design.Widget;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+using Dmax.Dialog;
 using Firebase.Auth;
 using Java.Interop;
 using RandomPlayers.Contracts;
@@ -21,13 +22,13 @@ using RandomPlayers.Fragments;
 using RandomPlayers.Services;
 using static Android.Views.View;
 
-namespace RandomPlayers {
+namespace RandomPlayers.Activity {
     [Activity(Label = "UserInfo", Theme = "@style/AppTheme")]
     public class UserInfo : AppCompatActivity {
 
 
-        EditText input_first_name, input_last_name, input_country, input_city, input_birth_date;
-        RelativeLayout activity_user_info;
+        EditText firstName, lastName, country, city;
+        TextView birthDate;
         FirebaseAuth auth;
         User User;
         string dateOfBirth;
@@ -39,13 +40,12 @@ namespace RandomPlayers {
 
             auth = FirebaseAuth.Instance;
 
-            input_first_name = FindViewById<EditText>(Resource.Id.info_first_name);
-            input_last_name = FindViewById<EditText>(Resource.Id.info_last_name);
-            input_country = FindViewById<EditText>(Resource.Id.info_country);
-            input_city = FindViewById<EditText>(Resource.Id.info_city);
-            input_birth_date = FindViewById<EditText>(Resource.Id.info_birth_date);
-            activity_user_info = FindViewById<RelativeLayout>(Resource.Id.activity_user_info);
-
+            firstName = FindViewById<EditText>(Resource.Id.firstName);
+            lastName = FindViewById<EditText>(Resource.Id.lastName);
+            country = FindViewById<EditText>(Resource.Id.country);
+            city = FindViewById<EditText>(Resource.Id.city);
+            birthDate = FindViewById<TextView>(Resource.Id.birthDate);
+            
             AccountsApi = new ApiService();
         }
 
@@ -57,7 +57,7 @@ namespace RandomPlayers {
         [Export("birthDateTextClick")]
         public void birthDateTextClick(View v) {
             var frag = DatePickerFragment.NewInstance(delegate (DateTime time) {
-                input_birth_date.Text = time.ToLongDateString();
+                birthDate.Text = time.ToLongDateString();
                 dateOfBirth = time.ToString("yyyy-MM-ddThh:mm:ss.000Z");
             });
 
@@ -65,13 +65,15 @@ namespace RandomPlayers {
         }
 
         async void CreateUser() {
+            Android.App.AlertDialog dialog = new SpotsDialog(this);
+            dialog.Show();
             User = new User {
                 Email = auth.CurrentUser.Email,
                 Id = auth.CurrentUser.Uid.ToString(),
-                FirstName = input_first_name.Text,
-                LastName = input_last_name.Text,
-                Country = input_country.Text,
-                City = input_city.Text,
+                FirstName = firstName.Text,
+                LastName = lastName.Text,
+                Country = country.Text,
+                City = city.Text,
                 DateOfBirth = DateTime.ParseExact(dateOfBirth, "yyyy-MM-ddThh:mm:ss.000Z", CultureInfo.InvariantCulture)
 
             };
@@ -80,7 +82,7 @@ namespace RandomPlayers {
                 StartActivity(new Intent(this, typeof(DashBoard)));
                 Finish();
             }
-
+            dialog.Dismiss();
 
         }
 

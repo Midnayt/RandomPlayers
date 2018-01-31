@@ -18,13 +18,16 @@ using Java.Interop;
 using RandomPlayers.DBO;
 using RandomPlayers.Contracts;
 using RandomPlayers.Services;
+using Dmax.Dialog;
+using RandomPlayers.Fragments.DialogFragments;
 
-namespace RandomPlayers {
+namespace RandomPlayers.Activity {
     [Activity(Label = "DashBoard", Theme = "@style/AppTheme")]
-    public class DashBoard : AppCompatActivity, IOnCompleteListener {
+    public class DashBoard : AppCompatActivity  {
         TextView txtWelcome, firstName, lastName, City, Country, birthDate;
-        EditText input_new_password;
-        LinearLayout activity_dashboard;
+        EditText newPassword;
+        LinearLayout linearLayout;
+        
 
         IFirestoreProvider AccountsApi;
         FirebaseAuth auth;
@@ -36,14 +39,14 @@ namespace RandomPlayers {
             auth = FirebaseAuth.Instance;
 
             //View
-            txtWelcome = FindViewById<TextView>(Resource.Id.dashboard_welcome);
-            firstName = FindViewById<TextView>(Resource.Id.dashboard_FirstName);
-            lastName = FindViewById<TextView>(Resource.Id.dashboard_LastName);
-            City = FindViewById<TextView>(Resource.Id.dashboard_City);
-            Country = FindViewById<TextView>(Resource.Id.dashboard_Country);
-            birthDate = FindViewById<TextView>(Resource.Id.dashboard_BirthDate);
-            input_new_password = FindViewById<EditText>(Resource.Id.dashboard_newpassword);
-            activity_dashboard = FindViewById<LinearLayout>(Resource.Id.activity_dashboard);
+            txtWelcome = FindViewById<TextView>(Resource.Id.welcome);
+            firstName = FindViewById<TextView>(Resource.Id.firstName);
+            lastName = FindViewById<TextView>(Resource.Id.lastName);
+            City = FindViewById<TextView>(Resource.Id.city);
+            Country = FindViewById<TextView>(Resource.Id.country);
+            birthDate = FindViewById<TextView>(Resource.Id.birthDate);
+            newPassword = FindViewById<EditText>(Resource.Id.newPassword);
+            linearLayout = FindViewById<LinearLayout>(Resource.Id.activity_dashboard);
 
             //Check session
             //if (auth.CurrentUser != null)
@@ -54,14 +57,14 @@ namespace RandomPlayers {
 
         [Export("OnChangePasswordButtonClick")]
         public void OnChangePasswordButtonClick(View view) {
-            var newPassword = input_new_password.Text;
+            var newPass = newPassword.Text;
             
-            if (!string.IsNullOrEmpty(newPassword)) {
-                ChangePassword(newPassword);
+            if (!string.IsNullOrEmpty(newPass)) {
+                ChangePassword(newPass);
 
             } else {
-                Snackbar snackBar = Snackbar.Make(activity_dashboard, "¬вед≥ть пароль", Snackbar.LengthShort);
-                snackBar.Show();
+                var newFragment = new MessageAlert("Enter Passwor");
+                newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
             }
         }
 
@@ -81,19 +84,15 @@ namespace RandomPlayers {
 
         private void ChangePassword(string newPassword) {
             FirebaseUser user = auth.CurrentUser;
-            user.UpdatePassword(newPassword)
-                .AddOnCompleteListener(this);
+            user.UpdatePassword(newPassword);
 
         }
 
-        public void OnComplete(Task task) {
-            if (task.IsSuccessful == true) {
-                Snackbar snackBar = Snackbar.Make(activity_dashboard, "Password has been changed", Snackbar.LengthShort);
-                snackBar.Show();
-            }
-        }
+        
 
         async void GetUser() {
+            Android.App.AlertDialog dialog = new SpotsDialog(this);
+            dialog.Show();
             try {
                 var response = await AccountsApi.GetCurentUser();
                 var user = response.ResponseObject;
@@ -104,12 +103,13 @@ namespace RandomPlayers {
                         lastName.Text = user.LastName;
                         City.Text = user.City;
                         Country.Text = user.Country;
-                        birthDate.Text = user.DateOfBirth.ToString();
-                        activity_dashboard.Invalidate();
+                        birthDate.Text = user.DateOfBirth?.ToString("dd-MMM-yyyy"); 
+                        linearLayout.Invalidate();
 
                     });
                 }                
             } catch (Exception ex) { }
+            dialog.Dismiss();
         }
 
     }

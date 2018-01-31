@@ -15,7 +15,7 @@ using static Android.Views.View;
 using Android.Gms.Tasks;
 using Android.Support.Design.Widget;
 
-namespace RandomPlayers {
+namespace RandomPlayers.Activity {
     [Activity(Label = "ForgotPassword", Theme = "@style/AppTheme")]
     public class ForgotPassword : AppCompatActivity, IOnClickListener, IOnCompleteListener {
         private EditText input_email;

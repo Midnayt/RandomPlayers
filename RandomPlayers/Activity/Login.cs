@@ -13,49 +13,51 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using Java.Interop;
 using RandomPlayers.Fragments.DialogFragments;
+using Dmax.Dialog;
+using System.Runtime.Remoting.Contexts;
 
-namespace RandomPlayers {
-    [Activity(Label = "MainActivity", MainLauncher = false, Icon = "@drawable/icon", Theme = "@style/AppTheme")]
-    public class MainActivity : AppCompatActivity {
+namespace RandomPlayers.Activity {
+    [Activity(Label = "Login", MainLauncher = false, Icon = "@drawable/dice", Theme = "@style/AppTheme")]
+    public class Login : AppCompatActivity {
 
-        ProgressBar progressBar;
-        EditText input_email, input_password;
-        RelativeLayout activity_main;
+        
+        EditText email, password;
+
+        
 
         protected override void OnCreate(Bundle bundle) {
             base.OnCreate(bundle);
-            SetContentView(Resource.Layout.Main);
+            SetContentView(Resource.Layout.Login);
 
             //View
-            progressBar = FindViewById<ProgressBar>(Resource.Id.LoadingProgressBar);
-            input_email = FindViewById<EditText>(Resource.Id.login_email);
-            input_password = FindViewById<EditText>(Resource.Id.login_password);
-            activity_main = FindViewById<RelativeLayout>(Resource.Id.activity_main);
-
-
+            
+            email = FindViewById<EditText>(Resource.Id.textEmail);
+            password = FindViewById<EditText>(Resource.Id.textPassword);
         }
 
         [Export("OnLoginButtonClick")]
         public void OnLoginButtonClick(View view) {
-            LoginUser(input_email.Text, input_password.Text);
+            LoginUser(email.Text, password.Text);
 
         }
 
-        [Export("OnForgotPasswordTextClick")]
-        public void OnForgotPasswordTextClick(View view) {
-            StartActivity(new Android.Content.Intent(this, typeof(ForgotPassword)));
-            Finish();
-        }
+        //[Export("OnForgotPasswordTextClick")]
+        //public void OnForgotPasswordTextClick(View view) {
+        //    StartActivity(new Android.Content.Intent(this, typeof(UserInfo)));
+        //    Finish();
+        //}
 
-        [Export("OnSignUpTextClick")]
-        public void OnSignUpTextClick(View view) {
+        [Export("OnSignUpClick")]
+        public void OnSignUpClick(View view) {
             StartActivity(new Android.Content.Intent(this, typeof(SignUp)));
             Finish();
         }
 
 
         private async void LoginUser(string email, string password) {
-            progressBar.Visibility = ViewStates.Visible;
+            Android.App.AlertDialog dialog = new SpotsDialog(this);
+            dialog.Show();
+
             try {
                 var user = await FirebaseAuth.Instance.SignInWithEmailAndPasswordAsync(email, password);
 
@@ -71,8 +73,9 @@ namespace RandomPlayers {
             } catch (Exception ex) {
                 var newFragment = new MessageAlert(ex.Message);
                 newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
+
             };
-            progressBar.Visibility = ViewStates.Gone;
+            dialog.Dismiss();
         }
 
     }

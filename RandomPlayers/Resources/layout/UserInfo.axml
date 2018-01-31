@@ -1,96 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_user_info"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/userInfo"
+    android:orientation="vertical"
     android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ImageView
+        android:background="@drawable/icon"
+        android:layout_height="150dp"
         android:id="@+id/icon"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/firebase"
-        android:layout_width="100dp"
-        android:layout_height="100dp" />
-    <android.support.design.widget.TextInputLayout
-        android:layout_below="@+id/icon"
-        android:id="@+id/info_input_first_name"
+        android:layout_width="200dp"
+        android:layout_gravity="center" />
+    <EditText
+        android:id="@+id/firstName"
+        android:hint="Введіть своє ім'я"
+        android:inputType="textCapWords"
+        android:maxLines="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/info_first_name"
-            android:hint="Введіть своє ім'я"
-            android:inputType="textCapWords"
-            android:maxLines="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_below="@+id/info_input_first_name"
-        android:id="@+id/info_input_last_name"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/lastName"
+        android:hint="Введіть прізвище"
+        android:inputType="textCapWords"
+        android:maxLines="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/info_last_name"
-            android:hint="Введіть прізвище"
-            android:inputType="textCapWords"
-            android:maxLines="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_below="@+id/info_input_last_name"
-        android:id="@+id/info_input_country"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/country"
+        android:hint="Країна"
+        android:inputType="textCapWords"
+        android:maxLines="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/info_country"
-            android:hint="Країна"
-            android:inputType="textCapWords"
-            android:maxLines="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_below="@+id/info_input_country"
-        android:id="@+id/info_input_city"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/city"
+        android:hint="Місто"
+        android:inputType="textCapWords"
+        android:maxLines="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/info_city"
-            android:hint="Місто"
-            android:inputType="textCapWords"
-            android:maxLines="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:layout_below="@+id/info_input_city"
-        android:id="@+id/info_input_birth_date"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/birthDate"
+        android:hint="Дата народження"
+        android:inputType="date"
+        android:maxLines="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/info_birth_date"
-            android:hint="Дата народження"
-            android:inputType="date"
-            android:maxLines="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </android.support.design.widget.TextInputLayout>
-    <ImageView
-        android:id="@+id/icon"
-        android:background="@drawable/firebase"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:clickable="true"
+        android:layout_height="35dp"
         android:onClick="birthDateTextClick"
-        android:layout_alignParentLeft="@+id/info_input_birth_date" />
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:textSize="18dp" />
     <Button
-        android:layout_below="@+id/info_input_birth_date"
-        android:id="@+id/info_btn_register"
+        android:id="@+id/btnRegister"
         android:text="Реєстрація"
         android:background="#263238"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="OnRegisterButtonClick" />
-</RelativeLayout>
+</LinearLayout>

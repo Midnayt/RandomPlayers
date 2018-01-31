@@ -15,8 +15,8 @@ using Felipecsl.GifImageViewLibrary;
 using Firebase.Analytics;
 using Firebase.Auth;
 
-namespace RandomPlayers {
-    [Activity(Label = "Casual play", MainLauncher = true, NoHistory =true, Icon = "@drawable/firebase", Theme = "@style/AppTheme")]
+namespace RandomPlayers.Activity {
+    [Activity(Label = "Casual play", MainLauncher = true, NoHistory =true, Icon = "@drawable/dice", Theme = "@style/AppTheme")]
     public class SplashScreen : AppCompatActivity {
 
         GifImageView gifImageView;

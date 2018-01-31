@@ -17,26 +17,22 @@ using Android.Support.Design.Widget;
 using Firebase;
 using RandomPlayers.Fragments.DialogFragments;
 using Java.Interop;
+using Dmax.Dialog;
 
-namespace RandomPlayers {
+namespace RandomPlayers.Activity {
     [Activity(Label = "SignUp", Theme = "@style/AppTheme")]
     public class SignUp : AppCompatActivity {
-
-        ProgressBar progressBar;
-        EditText input_email, input_password, input_password_confirm;
-        RelativeLayout activity_sign_up;
+                
+        EditText input_email, input_password, input_password_confirm;       
 
 
         protected override void OnCreate(Bundle savedInstanceState) {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.SignUp);
-
-            progressBar = (ProgressBar)FindViewById(Resource.Id.LoadingProgressBar);
+                        
             input_email = FindViewById<EditText>(Resource.Id.signup_email);
             input_password = FindViewById<EditText>(Resource.Id.signup_password);
-            input_password_confirm = FindViewById<EditText>(Resource.Id.signup_password_confirm);
-            activity_sign_up = FindViewById<RelativeLayout>(Resource.Id.activity_user_info);
-
+            input_password_confirm = FindViewById<EditText>(Resource.Id.signup_password_confirm);            
         }
 
         [Export("OnForgotPasswordTextClick")]
@@ -56,18 +52,7 @@ namespace RandomPlayers {
             if (input_password.Text == input_password_confirm.Text) {
                 SignUpUser(input_email.Text, input_password.Text);
 
-
-            } else {
-                //FragmentTransaction ft = FragmentManager.BeginTransaction();
-                ////Remove fragment else it will crash as it is already added to backstack
-                //Fragment prev = FragmentManager.FindFragmentByTag("dialog");
-                //if (prev != null) {
-                //    ft.Remove(prev);
-                //}
-
-                //ft.AddToBackStack(null);
-
-                // Create and show the dialog.
+            } else {              
                 var newFragment = new MessageAlert("Паролі не співпадають");
 
                 //Add fragment
@@ -77,7 +62,8 @@ namespace RandomPlayers {
 
 
         private async void SignUpUser(string email, string password) {
-            progressBar.Visibility = ViewStates.Visible;
+            Android.App.AlertDialog dialog = new SpotsDialog(this);
+            dialog.Show();
             try {
                 var user = await FirebaseAuth.Instance.CreateUserWithEmailAndPasswordAsync(email, password);
 
@@ -88,13 +74,11 @@ namespace RandomPlayers {
                 }
             } catch (Exception ex) {
                 var newFragment = new MessageAlert(ex.Message);
-
                 //Add fragment
                 newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
             }
-            //FirebaseAuth.Instance.CreateUserWithEmailAndPassword(email, password).AddOnCompleteListener(this, this);
-            progressBar.Visibility = ViewStates.Gone;
-
+            dialog.Dismiss();
+            
         }
 
     }
