@@ -56,6 +56,9 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mono.Android.Export" />
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -176,8 +179,11 @@
     <Compile Include="Activity\SignUp.cs" />
     <Compile Include="Activity\SplashScreen.cs" />
     <Compile Include="Activity\UserInfo.cs" />
+    <Compile Include="Contracts\IFileHelper.cs" />
     <Compile Include="Contracts\IFirestoreProvider.cs" />
+    <Compile Include="Contracts\ILocalProvider.cs" />
     <Compile Include="Fragments\DatePickerFragment.cs" />
+    <Compile Include="Implementations\FileHelper.cs" />
     <Compile Include="Models\DBO\BaseDBO.cs" />
     <Compile Include="Models\DBO\User.cs" />
     <Compile Include="Extentions\ApiResponse.cs" />

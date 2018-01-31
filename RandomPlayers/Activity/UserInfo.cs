@@ -30,9 +30,10 @@ namespace RandomPlayers.Activity {
         EditText firstName, lastName, country, city;
         TextView birthDate;
         FirebaseAuth auth;
-        User User;
+        User user;
         string dateOfBirth;
         IFirestoreProvider AccountsApi;
+        ILocalProvider LocalProvider;
 
         protected override void OnCreate(Bundle savedInstanceState) {
             base.OnCreate(savedInstanceState);
@@ -47,6 +48,7 @@ namespace RandomPlayers.Activity {
             birthDate = FindViewById<TextView>(Resource.Id.birthDate);
             
             AccountsApi = new ApiService();
+            LocalProvider = new LocalProviderService();
         }
 
         [Export("OnRegisterButtonClick")]
@@ -67,7 +69,7 @@ namespace RandomPlayers.Activity {
         async void CreateUser() {
             Android.App.AlertDialog dialog = new SpotsDialog(this);
             dialog.Show();
-            User = new User {
+            user = new User {
                 Email = auth.CurrentUser.Email,
                 Id = auth.CurrentUser.Uid.ToString(),
                 FirstName = firstName.Text,
@@ -77,8 +79,9 @@ namespace RandomPlayers.Activity {
                 DateOfBirth = DateTime.ParseExact(dateOfBirth, "yyyy-MM-ddThh:mm:ss.000Z", CultureInfo.InvariantCulture)
 
             };
-            var response = await AccountsApi.RegisterNew(User);
+            var response = await AccountsApi.RegisterNew(user);
             if (response.Succeed) {
+                LocalProvider.SetCurrentUser(user);
                 StartActivity(new Intent(this, typeof(DashBoard)));
                 Finish();
             }

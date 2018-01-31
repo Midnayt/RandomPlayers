@@ -28,9 +28,9 @@ namespace RandomPlayers.Services {
 
             var k = JsonConvert.SerializeObject(user, Formatting.Indented, new KeysJsonConverter(typeof(User)));
 
-            var keys = new List<KeyValuePair<string, string>> {
-                new KeyValuePair<string, string> ("fields", k)
-            };
+            //var keys = new List<KeyValuePair<string, string>> {
+            //    new KeyValuePair<string, string> ("fields", k)
+            //};
 
             var url = $"{ApiUrl}/documents/users?documentId={user.Id}";
 

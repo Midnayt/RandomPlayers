@@ -15,24 +15,27 @@ using Java.Interop;
 using RandomPlayers.Fragments.DialogFragments;
 using Dmax.Dialog;
 using System.Runtime.Remoting.Contexts;
+using RandomPlayers.Contracts;
+using RandomPlayers.Services;
 
 namespace RandomPlayers.Activity {
     [Activity(Label = "Login", MainLauncher = false, Icon = "@drawable/dice", Theme = "@style/AppTheme")]
     public class Login : AppCompatActivity {
 
-        
+        ILocalProvider LocalProvider;
+        IFirestoreProvider AccountsApi;
         EditText email, password;
-
-        
 
         protected override void OnCreate(Bundle bundle) {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Login);
 
             //View
-            
+
             email = FindViewById<EditText>(Resource.Id.textEmail);
             password = FindViewById<EditText>(Resource.Id.textPassword);
+            AccountsApi = new ApiService();
+            LocalProvider = new LocalProviderService();
         }
 
         [Export("OnLoginButtonClick")]
@@ -60,16 +63,19 @@ namespace RandomPlayers.Activity {
 
             try {
                 var user = await FirebaseAuth.Instance.SignInWithEmailAndPasswordAsync(email, password);
-
                 if (user != null) {
+                    var response = await AccountsApi.GetCurentUser();
 
-                    StartActivity(new Android.Content.Intent(this, typeof(DashBoard)));
-                    Finish();
-
+                    if (response.Succeed) {
+                        LocalProvider.SetCurrentUser(response.ResponseObject);
+                        StartActivity(new Android.Content.Intent(this, typeof(DashBoard)));
+                        Finish();
+                    }
                 } else {
                     var newFragment = new MessageAlert("Немає достуду до користувача");
                     newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
                 }
+
             } catch (Exception ex) {
                 var newFragment = new MessageAlert(ex.Message);
                 newFragment.Show(FragmentManager.BeginTransaction(), "dialog");

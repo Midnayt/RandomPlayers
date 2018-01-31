@@ -27,9 +27,9 @@ namespace RandomPlayers.Activity {
         TextView txtWelcome, firstName, lastName, City, Country, birthDate;
         EditText newPassword;
         LinearLayout linearLayout;
-        
 
-        IFirestoreProvider AccountsApi;
+        ILocalProvider LocalProvider;
+        //IFirestoreProvider AccountsApi;
         FirebaseAuth auth;
         protected override void OnCreate(Bundle savedInstanceState) {
             base.OnCreate(savedInstanceState);
@@ -51,7 +51,8 @@ namespace RandomPlayers.Activity {
             //Check session
             //if (auth.CurrentUser != null)
                 
-            AccountsApi = new ApiService();
+            //AccountsApi = new ApiService();
+            LocalProvider = new LocalProviderService();
             GetUser();
         }
 
@@ -77,6 +78,7 @@ namespace RandomPlayers.Activity {
         private void LogoutUser() {
             auth.SignOut();
             if (auth.CurrentUser == null) {
+            LocalProvider.ClearCurrentUser();
                 StartActivity(new Intent(this, typeof(Login)));
                 Finish();
             }
@@ -90,12 +92,12 @@ namespace RandomPlayers.Activity {
 
         
 
-        async void GetUser() {
+        void GetUser() {
             Android.App.AlertDialog dialog = new SpotsDialog(this);
             dialog.Show();
             try {
-                var response = await AccountsApi.GetCurentUser();
-                var user = response.ResponseObject;
+                //var response = await AccountsApi.GetCurentUser();
+                var user = LocalProvider.GetCurrentUser();
                 using(var p = new Handler(Looper.MainLooper)) {
                     p.Post(() => {
                         txtWelcome.Text = "Welcome , " + user.Email;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Timers;
 using Android.App;
 using Android.Content;
@@ -14,6 +15,8 @@ using Android.Widget;
 using Felipecsl.GifImageViewLibrary;
 using Firebase.Analytics;
 using Firebase.Auth;
+using RandomPlayers.Contracts;
+using RandomPlayers.Services;
 
 namespace RandomPlayers.Activity {
     [Activity(Label = "Casual play", MainLauncher = true, NoHistory =true, Icon = "@drawable/dice", Theme = "@style/AppTheme")]
@@ -21,36 +24,43 @@ namespace RandomPlayers.Activity {
 
         GifImageView gifImageView;
         ProgressBar progressBar;
+        ILocalProvider LocalProvider;
 
-        
+
         protected override void OnCreate(Bundle savedInstanceState) {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.SplashScreen);
 
             gifImageView = (GifImageView)FindViewById(Resource.Id.gifImageView);
-            progressBar = (ProgressBar)FindViewById(Resource.Id.progressBar);
+            progressBar = (ProgressBar)FindViewById(Resource.Id.progressBar);            
 
             Stream input = Assets.Open("splashscreen.gif");
             byte[] bytes = ConvertFileToByteArray(input);
             gifImageView.SetBytes(bytes);
             gifImageView.StartAnimation();
 
+            LocalProvider = new LocalProviderService();
 
-            Timer timer = new Timer();
-            timer.Interval = 3000;
-            timer.AutoReset = false;
-            timer.Elapsed += Timer_Elapsed;
-            timer.Start();
-            var auth = FirebaseAuth.Instance;
-            var firebaseAnalytics = FirebaseAnalytics.GetInstance(this);
+            Task.Factory.StartNew(async () => {
+                await Task.Delay(2000);
+                var user = LocalProvider.GetCurrentUser();
+                if (user != null) {
+                    StartActivity(new Intent(this, typeof(DashBoard)));
+                    Finish();
+                } else {
+                    StartActivity(new Intent(this, typeof(Login)));
+                    Finish();
+                }
+           
+                //var auth = FirebaseAuth.Instance;
+                //var firebaseAnalytics = FirebaseAnalytics.GetInstance(this);
+
+            });
 
 
         }
 
-        private void Timer_Elapsed(object sender, ElapsedEventArgs e) {
-            
-            StartActivity(new Intent(this,typeof(Login)));
-        }
+        
 
         byte[] ConvertFileToByteArray(Stream input) {
             byte[] buffer = new byte[16 * 1024];
