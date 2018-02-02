@@ -182,6 +182,10 @@
     <Compile Include="Contracts\IFileHelper.cs" />
     <Compile Include="Contracts\IFirestoreProvider.cs" />
     <Compile Include="Contracts\ILocalProvider.cs" />
+    <Compile Include="Extentions\CustomInit.cs" />
+    <Compile Include="Extentions\Autofack\Exceptions.cs" />
+    <Compile Include="Extentions\Autofack\Init.cs" />
+    <Compile Include="Extentions\Autofack\Methods.cs" />
     <Compile Include="Fragments\DatePickerFragment.cs" />
     <Compile Include="Implementations\FileHelper.cs" />
     <Compile Include="Models\DBO\BaseDBO.cs" />

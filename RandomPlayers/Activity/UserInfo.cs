@@ -18,6 +18,7 @@ using Firebase.Auth;
 using Java.Interop;
 using RandomPlayers.Contracts;
 using RandomPlayers.DBO;
+using RandomPlayers.Extentions;
 using RandomPlayers.Fragments;
 using RandomPlayers.Services;
 using static Android.Views.View;
@@ -47,8 +48,8 @@ namespace RandomPlayers.Activity {
             city = FindViewById<EditText>(Resource.Id.city);
             birthDate = FindViewById<TextView>(Resource.Id.birthDate);
             
-            AccountsApi = new ApiService();
-            LocalProvider = new LocalProviderService();
+            AccountsApi = Methods.GetService<IFirestoreProvider>();
+            LocalProvider = Methods.GetService<ILocalProvider>();
         }
 
         [Export("OnRegisterButtonClick")]

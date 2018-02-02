@@ -17,6 +17,7 @@ using Dmax.Dialog;
 using System.Runtime.Remoting.Contexts;
 using RandomPlayers.Contracts;
 using RandomPlayers.Services;
+using RandomPlayers.Extentions;
 
 namespace RandomPlayers.Activity {
     [Activity(Label = "Login", MainLauncher = false, Icon = "@drawable/dice", Theme = "@style/AppTheme")]
@@ -34,8 +35,8 @@ namespace RandomPlayers.Activity {
 
             email = FindViewById<EditText>(Resource.Id.textEmail);
             password = FindViewById<EditText>(Resource.Id.textPassword);
-            AccountsApi = new ApiService();
-            LocalProvider = new LocalProviderService();
+            AccountsApi = Methods.GetService<IFirestoreProvider>();
+            LocalProvider = Methods.GetService<ILocalProvider>();
         }
 
         [Export("OnLoginButtonClick")]

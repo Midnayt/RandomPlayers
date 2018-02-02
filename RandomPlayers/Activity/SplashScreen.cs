@@ -16,6 +16,7 @@ using Felipecsl.GifImageViewLibrary;
 using Firebase.Analytics;
 using Firebase.Auth;
 using RandomPlayers.Contracts;
+using RandomPlayers.Extentions;
 using RandomPlayers.Services;
 
 namespace RandomPlayers.Activity {
@@ -26,20 +27,21 @@ namespace RandomPlayers.Activity {
         ProgressBar progressBar;
         ILocalProvider LocalProvider;
 
-
         protected override void OnCreate(Bundle savedInstanceState) {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.SplashScreen);
 
+            Init.Initialize(new CustomInit());
+
             gifImageView = (GifImageView)FindViewById(Resource.Id.gifImageView);
             progressBar = (ProgressBar)FindViewById(Resource.Id.progressBar);            
+            LocalProvider = Methods.GetService<ILocalProvider>();
 
             Stream input = Assets.Open("splashscreen.gif");
             byte[] bytes = ConvertFileToByteArray(input);
             gifImageView.SetBytes(bytes);
             gifImageView.StartAnimation();
 
-            LocalProvider = new LocalProviderService();
 
             Task.Factory.StartNew(async () => {
                 await Task.Delay(2000);

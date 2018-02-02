@@ -20,6 +20,7 @@ using RandomPlayers.Contracts;
 using RandomPlayers.Services;
 using Dmax.Dialog;
 using RandomPlayers.Fragments.DialogFragments;
+using RandomPlayers.Extentions;
 
 namespace RandomPlayers.Activity {
     [Activity(Label = "DashBoard", Theme = "@style/AppTheme")]
@@ -52,7 +53,7 @@ namespace RandomPlayers.Activity {
             //if (auth.CurrentUser != null)
                 
             //AccountsApi = new ApiService();
-            LocalProvider = new LocalProviderService();
+            LocalProvider = Methods.GetService<ILocalProvider>();
             GetUser();
         }
 
