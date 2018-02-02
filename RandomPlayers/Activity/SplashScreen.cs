@@ -20,7 +20,7 @@ using RandomPlayers.Extentions;
 using RandomPlayers.Services;
 
 namespace RandomPlayers.Activity {
-    [Activity(Label = "Casual play", MainLauncher = true, NoHistory =true, Icon = "@drawable/dice", Theme = "@style/AppTheme")]
+    [Activity(Label = "Casual play", MainLauncher = true, NoHistory =true, Icon = "@drawable/dice", Theme = "@style/Theme.Splash")]
     public class SplashScreen : AppCompatActivity {
 
         GifImageView gifImageView;
@@ -31,21 +31,25 @@ namespace RandomPlayers.Activity {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.SplashScreen);
 
-            Init.Initialize(new CustomInit());
-
             gifImageView = (GifImageView)FindViewById(Resource.Id.gifImageView);
             progressBar = (ProgressBar)FindViewById(Resource.Id.progressBar);            
-            LocalProvider = Methods.GetService<ILocalProvider>();
-
             Stream input = Assets.Open("splashscreen.gif");
             byte[] bytes = ConvertFileToByteArray(input);
             gifImageView.SetBytes(bytes);
             gifImageView.StartAnimation();
+        }
+
+        protected override void OnResume() {
+            base.OnResume();
+            Init.Initialize(new CustomInit());
+
+            LocalProvider = Methods.GetService<ILocalProvider>();
 
 
-            Task.Factory.StartNew(async () => {
-                await Task.Delay(2000);
-                var user = LocalProvider.GetCurrentUser();
+
+            //Task.Factory.StartNew(async () => {
+            //    await Task.Delay(2000);
+            var user = LocalProvider.GetCurrentUser();
                 if (user != null) {
                     StartActivity(new Intent(this, typeof(DashBoard)));
                     Finish();
@@ -57,12 +61,11 @@ namespace RandomPlayers.Activity {
                 //var auth = FirebaseAuth.Instance;
                 //var firebaseAnalytics = FirebaseAnalytics.GetInstance(this);
 
-            });
+            //});
+
 
 
         }
-
-        
 
         byte[] ConvertFileToByteArray(Stream input) {
             byte[] buffer = new byte[16 * 1024];

@@ -3,5 +3,6 @@
   <color name="colorPrimary">#607D8B</color>
   <color name="colorPrimaryDark">#37474F</color>
   <color name="colorAccent">#cc000000</color>
-  <color name="colorIndigo">#e10000</color>
+  <color name="window_background">#F5F5F5</color>
+  <color name="splash_background">#FFFFFF</color>
 </resources>
