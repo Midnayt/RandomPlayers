@@ -28,7 +28,7 @@ namespace RandomPlayers.Activity {
 
         protected override void OnCreate(Bundle savedInstanceState) {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.SignUp);
+            SetContentView(Resource.Layout.Activity_SignUp);
                         
             input_email = FindViewById<EditText>(Resource.Id.signup_email);
             input_password = FindViewById<EditText>(Resource.Id.signup_password);

@@ -22,7 +22,7 @@ namespace RandomPlayers.Services {
     public class ApiService : BaseAPI, IFirestoreProvider {
 
         const string ApiUrl = "https://firestore.googleapis.com/v1beta1/projects/random-players/databases/(default)";
-        User user;
+        //User user;
 
         public async Task<ApiResponse> RegisterNew(User user) {
 

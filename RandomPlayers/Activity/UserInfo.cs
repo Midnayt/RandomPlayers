@@ -38,7 +38,7 @@ namespace RandomPlayers.Activity {
 
         protected override void OnCreate(Bundle savedInstanceState) {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.UserInfo);
+            SetContentView(Resource.Layout.Activity_UserInfo);
 
             auth = FirebaseAuth.Instance;
 
@@ -83,7 +83,7 @@ namespace RandomPlayers.Activity {
             var response = await AccountsApi.RegisterNew(user);
             if (response.Succeed) {
                 LocalProvider.SetCurrentUser(user);
-                StartActivity(new Intent(this, typeof(DashBoard)));
+                StartActivity(new Intent(this, typeof(UserProfile)));
                 Finish();
             }
             dialog.Dismiss();

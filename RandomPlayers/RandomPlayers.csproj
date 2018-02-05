@@ -173,7 +173,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activity\DashBoard.cs" />
+    <Compile Include="Activity\EditUserProfile.cs" />
+    <Compile Include="Activity\UserProfile.cs" />
     <Compile Include="Activity\ForgotPassword.cs" />
     <Compile Include="Activity\Login.cs" />
     <Compile Include="Activity\SignUp.cs" />
@@ -206,22 +207,22 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
-    <AndroidResource Include="Resources\layout\DashBoard.axml" />
-    <AndroidResource Include="Resources\layout\ForgotPassword.axml" />
-    <AndroidResource Include="Resources\layout\SignUp.axml">
+    <AndroidResource Include="Resources\layout\Activity_UserProfile.axml" />
+    <AndroidResource Include="Resources\layout\Activity_ForgotPassword.axml" />
+    <AndroidResource Include="Resources\layout\Activity_SignUp.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <GoogleServicesJson Include="Resources\values\google-services.json" />
-    <AndroidResource Include="Resources\layout\SplashScreen.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\UserInfo.axml">
+    <AndroidResource Include="Resources\layout\Activity_UserInfo.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\dialogFragment_MessageAlert.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\Login.axml">
+    <AndroidResource Include="Resources\layout\Activity_Login.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Activity_EditUserProgile.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/userEditProfile"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+  <ImageView
+      android:background="@drawable/icon"
+      android:layout_height="150dp"
+      android:id="@+id/icon"
+      android:layout_width="200dp"
+      android:layout_gravity="center" />
+  <EditText
+      android:id="@+id/firstName"
+      android:hint="Введіть своє ім'я"
+      android:inputType="textCapWords"
+      android:maxLines="1"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
+  <EditText
+      android:id="@+id/lastName"
+      
+      android:inputType="textCapWords"
+      android:maxLines="1"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
+  <EditText
+      android:id="@+id/country"
+      
+      android:inputType="textCapWords"
+      android:maxLines="1"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
+  <EditText
+      android:id="@+id/city"
+      
+      android:inputType="textCapWords"
+      android:maxLines="1"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" />
+  <TextView
+      android:id="@+id/birthDate"
+      
+      android:inputType="date"
+      android:maxLines="1"
+      android:layout_width="match_parent"
+      android:layout_height="35dp"
+      android:onClick="birthDateTextClick"
+      android:clickable="true"
+      android:gravity="center_vertical"
+      android:textSize="18dp" />
+  <Button
+      android:id="@+id/btnUpdate"
+      android:text="Оновити інформацію"
+      android:background="#263238"
+      style="@style/Widget.AppCompat.Button.Colored"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:onClick="OnUpdateButtonClick" />
+</LinearLayout>

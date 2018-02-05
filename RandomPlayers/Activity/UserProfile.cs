@@ -24,7 +24,7 @@ using RandomPlayers.Extentions;
 
 namespace RandomPlayers.Activity {
     [Activity(Label = "DashBoard", Theme = "@style/AppTheme")]
-    public class DashBoard : AppCompatActivity  {
+    public class UserProfile : AppCompatActivity  {
         TextView txtWelcome, firstName, lastName, City, Country, birthDate;
         EditText newPassword;
         LinearLayout linearLayout;
@@ -34,7 +34,7 @@ namespace RandomPlayers.Activity {
         FirebaseAuth auth;
         protected override void OnCreate(Bundle savedInstanceState) {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.DashBoard);
+            SetContentView(Resource.Layout.Activity_UserProfile);
 
             //Init Firebase
             auth = FirebaseAuth.Instance;

@@ -29,7 +29,7 @@ namespace RandomPlayers.Activity {
 
         protected override void OnCreate(Bundle bundle) {
             base.OnCreate(bundle);
-            SetContentView(Resource.Layout.Login);
+            SetContentView(Resource.Layout.Activity_Login);
 
             //View
 
@@ -69,7 +69,7 @@ namespace RandomPlayers.Activity {
 
                     if (response.Succeed) {
                         LocalProvider.SetCurrentUser(response.ResponseObject);
-                        StartActivity(new Android.Content.Intent(this, typeof(DashBoard)));
+                        StartActivity(new Android.Content.Intent(this, typeof(UserProfile)));
                         Finish();
                     }
                 } else {

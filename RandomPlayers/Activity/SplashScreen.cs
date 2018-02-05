@@ -29,18 +29,19 @@ namespace RandomPlayers.Activity {
 
         protected override void OnCreate(Bundle savedInstanceState) {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.SplashScreen);
+            //SetContentView(Resource.Layout.SplashScreen);
 
-            gifImageView = (GifImageView)FindViewById(Resource.Id.gifImageView);
-            progressBar = (ProgressBar)FindViewById(Resource.Id.progressBar);            
-            Stream input = Assets.Open("splashscreen.gif");
-            byte[] bytes = ConvertFileToByteArray(input);
-            gifImageView.SetBytes(bytes);
-            gifImageView.StartAnimation();
+            //gifImageView = (GifImageView)FindViewById(Resource.Id.gifImageView);
+            //progressBar = (ProgressBar)FindViewById(Resource.Id.progressBar);            
+            //Stream input = Assets.Open("splashscreen.gif");
+            //byte[] bytes = ConvertFileToByteArray(input);
+            //gifImageView.SetBytes(bytes);
+            //gifImageView.StartAnimation();
         }
 
         protected override void OnResume() {
             base.OnResume();
+            var firebaseAnalytics = FirebaseAnalytics.GetInstance(this);
             Init.Initialize(new CustomInit());
 
             LocalProvider = Methods.GetService<ILocalProvider>();
@@ -51,7 +52,7 @@ namespace RandomPlayers.Activity {
             //    await Task.Delay(2000);
             var user = LocalProvider.GetCurrentUser();
                 if (user != null) {
-                    StartActivity(new Intent(this, typeof(DashBoard)));
+                    StartActivity(new Intent(this, typeof(UserProfile)));
                     Finish();
                 } else {
                     StartActivity(new Intent(this, typeof(Login)));
@@ -59,7 +60,6 @@ namespace RandomPlayers.Activity {
                 }
            
                 //var auth = FirebaseAuth.Instance;
-                //var firebaseAnalytics = FirebaseAnalytics.GetInstance(this);
 
             //});
 
