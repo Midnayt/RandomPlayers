@@ -31,6 +31,7 @@ namespace RandomPlayers.Extentions {
             var tt = JsonSerializer.CreateDefault();
             tt.NullValueHandling = NullValueHandling.Ignore;
             tt.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            tt.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
 
             JToken t = JToken.FromObject(value, tt);
 

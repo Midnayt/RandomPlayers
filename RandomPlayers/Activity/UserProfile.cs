@@ -25,8 +25,7 @@ using RandomPlayers.Extentions;
 namespace RandomPlayers.Activity {
     [Activity(Label = "DashBoard", Theme = "@style/AppTheme")]
     public class UserProfile : AppCompatActivity  {
-        TextView txtWelcome, firstName, lastName, City, Country, birthDate;
-        EditText newPassword;
+        TextView txtWelcome, firstName, lastName, City, Country, birthDate;        
         LinearLayout linearLayout;
 
         ILocalProvider LocalProvider;
@@ -45,8 +44,7 @@ namespace RandomPlayers.Activity {
             lastName = FindViewById<TextView>(Resource.Id.lastName);
             City = FindViewById<TextView>(Resource.Id.city);
             Country = FindViewById<TextView>(Resource.Id.country);
-            birthDate = FindViewById<TextView>(Resource.Id.birthDate);
-            newPassword = FindViewById<EditText>(Resource.Id.newPassword);
+            birthDate = FindViewById<TextView>(Resource.Id.birthDate);            
             linearLayout = FindViewById<LinearLayout>(Resource.Id.activity_dashboard);
 
             //Check session
@@ -57,17 +55,18 @@ namespace RandomPlayers.Activity {
             GetUser();
         }
 
-        [Export("OnChangePasswordButtonClick")]
-        public void OnChangePasswordButtonClick(View view) {
-            var newPass = newPassword.Text;
-            
-            if (!string.IsNullOrEmpty(newPass)) {
-                ChangePassword(newPass);
+        [Export("OnUpdateUserProfileButtonClick")]
+        public void OnUpdateUserProfileButtonClick(View view) {
+            //var newPass = newPassword.Text;
 
-            } else {
-                var newFragment = new MessageAlert("Enter Passwor");
-                newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
-            }
+            //if (!string.IsNullOrEmpty(newPass)) {
+            //    ChangePassword(newPass);
+
+            //} else {
+            //    var newFragment = new MessageAlert("Enter Passwor");
+            //    newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
+            //}
+            StartActivity(new Intent(this, typeof(EditUserProfile)));
         }
 
         [Export("OnLogOutButtonClick")]
@@ -80,16 +79,9 @@ namespace RandomPlayers.Activity {
             auth.SignOut();
             if (auth.CurrentUser == null) {
             LocalProvider.ClearCurrentUser();
-                StartActivity(new Intent(this, typeof(Login)));
-                Finish();
+                StartActivity(new Intent(this, typeof(Login)));                
             }
-        }
-
-        private void ChangePassword(string newPassword) {
-            FirebaseUser user = auth.CurrentUser;
-            user.UpdatePassword(newPassword);
-
-        }
+        }        
 
         
 
@@ -106,7 +98,7 @@ namespace RandomPlayers.Activity {
                         lastName.Text = user.LastName;
                         City.Text = user.City;
                         Country.Text = user.Country;
-                        birthDate.Text = user.DateOfBirth?.ToString("dd-MMM-yyyy"); 
+                        birthDate.Text = user.DateOfBirth?.ToString("dd MMMM yyyy"); 
                         linearLayout.Invalidate();
 
                     });

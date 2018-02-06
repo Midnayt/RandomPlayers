@@ -23,8 +23,8 @@ namespace RandomPlayers.Activity {
     [Activity(Label = "Casual play", MainLauncher = true, NoHistory =true, Icon = "@drawable/dice", Theme = "@style/Theme.Splash")]
     public class SplashScreen : AppCompatActivity {
 
-        GifImageView gifImageView;
-        ProgressBar progressBar;
+        //GifImageView gifImageView;
+        //ProgressBar progressBar;
         ILocalProvider LocalProvider;
 
         protected override void OnCreate(Bundle savedInstanceState) {

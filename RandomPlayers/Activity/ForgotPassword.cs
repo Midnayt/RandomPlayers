@@ -27,7 +27,7 @@ namespace RandomPlayers.Activity {
         FirebaseAuth auth;
         protected override void OnCreate(Bundle savedInstanceState) {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.ForgotPassword);
+            SetContentView(Resource.Layout.Activity_ForgotPassword);
 
             //Init Firebase
             auth = FirebaseAuth.Instance;

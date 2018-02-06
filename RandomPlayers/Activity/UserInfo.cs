@@ -32,7 +32,7 @@ namespace RandomPlayers.Activity {
         TextView birthDate;
         FirebaseAuth auth;
         User user;
-        string dateOfBirth;
+        DateTime? dateOfBirth;
         IFirestoreProvider AccountsApi;
         ILocalProvider LocalProvider;
 
@@ -61,7 +61,7 @@ namespace RandomPlayers.Activity {
         public void birthDateTextClick(View v) {
             var frag = DatePickerFragment.NewInstance(delegate (DateTime time) {
                 birthDate.Text = time.ToLongDateString();
-                dateOfBirth = time.ToString("yyyy-MM-ddThh:mm:ss.000Z");
+                dateOfBirth = time;
             });
 
             frag.Show(FragmentManager, DatePickerFragment.TAG);
@@ -77,7 +77,7 @@ namespace RandomPlayers.Activity {
                 LastName = lastName.Text,
                 Country = country.Text,
                 City = city.Text,
-                DateOfBirth = DateTime.ParseExact(dateOfBirth, "yyyy-MM-ddThh:mm:ss.000Z", CultureInfo.InvariantCulture)
+                DateOfBirth = dateOfBirth
 
             };
             var response = await AccountsApi.RegisterNew(user);

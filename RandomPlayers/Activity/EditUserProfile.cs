@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -16,6 +17,7 @@ using Java.Interop;
 using RandomPlayers.Contracts;
 using RandomPlayers.DBO;
 using RandomPlayers.Extentions;
+using RandomPlayers.Fragments;
 
 namespace RandomPlayers.Activity {
     [Activity(Label = "EditUserProfile", Theme = "@style/AppTheme")]
@@ -23,10 +25,10 @@ namespace RandomPlayers.Activity {
 
         EditText firstName, lastName, country, city;
         TextView birthDate;
-        LinearLayout linearLayout;;
+        LinearLayout linearLayout;
         FirebaseAuth auth;
         User user;
-        string dateOfBirth;
+        DateTime? dateOfBirth;
         IFirestoreProvider AccountsApi;
         ILocalProvider LocalProvider;
 
@@ -53,19 +55,29 @@ namespace RandomPlayers.Activity {
             UpdateUser();
         }
 
+        [Export("birthDateTextClick")]
+        public void birthDateTextClick(View v) {
+            var frag = DatePickerFragment.NewInstance(delegate (DateTime time) {
+                birthDate.Text = time.ToLongDateString();
+                dateOfBirth = time;
+            });
+
+            frag.Show(FragmentManager, DatePickerFragment.TAG);
+        }
+
         void GetUser() {
             Android.App.AlertDialog dialog = new SpotsDialog(this);
             dialog.Show();
             try {
                 
-                var user = LocalProvider.GetCurrentUser();
+                user = LocalProvider.GetCurrentUser();
                 using (var p = new Handler(Looper.MainLooper)) {
                     p.Post(() => {                        
                         firstName.Text = user.FirstName;
                         lastName.Text = user.LastName;
                         city.Text = user.City;
                         country.Text = user.Country;
-                        birthDate.Text = user.DateOfBirth?.ToString("dd-MMM-yyyy");
+                        birthDate.Text = user.DateOfBirth?.ToString("dd MMMM yyyy");
                         linearLayout.Invalidate();
 
                     });
@@ -77,7 +89,23 @@ namespace RandomPlayers.Activity {
         async void UpdateUser() {
             Android.App.AlertDialog dialog = new SpotsDialog(this);
             dialog.Show();
+            try {
+                user.FirstName = firstName.Text;
+                user.LastName = lastName.Text;
+                user.Country = country.Text;
+                user.City = city.Text;
+                if (dateOfBirth != null)
+                    user.DateOfBirth = dateOfBirth;
 
+                var response = await AccountsApi.UpdateCurentUser(user);
+                if (response.Succeed) {
+                    LocalProvider.SetCurrentUser(user);
+                    StartActivity(new Intent(this, typeof(UserProfile)));
+                    Finish();
+                }
+            }catch (Exception ex) {
+                System.Diagnostics.Debug.WriteLine($"{this.GetType().Name}: Exception: {ex.Message}");
+            }
             dialog.Dismiss();
 
         }

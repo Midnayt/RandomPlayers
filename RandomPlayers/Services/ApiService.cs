@@ -26,15 +26,10 @@ namespace RandomPlayers.Services {
 
         public async Task<ApiResponse> RegisterNew(User user) {
 
-            var k = JsonConvert.SerializeObject(user, Formatting.Indented, new KeysJsonConverter(typeof(User)));
-
-            //var keys = new List<KeyValuePair<string, string>> {
-            //    new KeyValuePair<string, string> ("fields", k)
-            //};
-
+            var k = JsonConvert.SerializeObject(user, Formatting.Indented, new KeysJsonConverter(typeof(User)));            
             var url = $"{ApiUrl}/documents/users?documentId={user.Id}";
 
-            ApiResponse response = await PostAsync(url, $"{{ \"fields\" : {k} }}");
+            ApiResponse response = await SendAsync(url, RequestMethodType.POST, $"{{ \"fields\" : {k} }}");
             return response;
 
         }
@@ -43,12 +38,16 @@ namespace RandomPlayers.Services {
 
             var id = FirebaseAuth.Instance.Uid;
             var url = $"{ApiUrl}/documents/users/{id}";
-            var response = await GetAsync<User>(url);
+            var response = await SendAsync<User>(url);
             return response;
         }
 
-        public Task<ApiResponse> UpdateCurentUser(User user) {
-            throw new NotImplementedException();
+        public async Task<ApiResponse> UpdateCurentUser(User user) {
+            var k = JsonConvert.SerializeObject(user, Formatting.Indented, new KeysJsonConverter(typeof(User)));
+            var url = $"{ApiUrl}/documents/users/{user.Id}";
+
+            ApiResponse response = await SendAsync(url, RequestMethodType.PATCH, $"{{ \"fields\" : {k} }}");
+            return response;
         }
 
         

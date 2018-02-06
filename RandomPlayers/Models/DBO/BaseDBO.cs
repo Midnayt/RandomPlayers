@@ -15,7 +15,7 @@ using SQLite;
 
 namespace RandomPlayers.DBO {
     public class BaseDBO {
-
+        [JsonIgnore]
         public string Id { get; set; }
 
         [JsonIgnore]
