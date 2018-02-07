@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <string name="app_name">Повсякденна гра</string>
+
+  <!--Localization-->
+  <!--LOGIN-->
+  <string name="login">Увійти</string>
+  <string name="email">Пошта</string>
+  <string name="password">Пароль</string>
+  <string name="signUp">Зареєструватися</string>  
+  <!--UserProfile-->
+  <string name="welcome">Вітаємо</string>
+  <string name="changeUserInfo">Змінити дані користувача</string>
+  <string name="logout">Вийти</string>
+  <!--EditUserProfile-->
+  <string name="updateUserInfo">Оновити дані</string>
+  <!--SignUp-->
+  <string name="enterYourEmail">Введіть пошту</string>
+  <string name="enterYourPassword">Введіть пароль</string>
+  <string name="confirmYourPassword">Підтвердіть пароль</string>
+  <string name="register">Зареєструватися</string>
+  <string name="forgotPassword">Забув пароль</string>
+  <string name="or">Або</string>
+  <string name="loginMe">Вже є обліковий запис? Увійдіть в систему</string>
+  <!--UserInfo-->
+  <string name="firstName">Імя</string>
+  <string name="lastName">Прізвище</string>
+  <string name="country">Країна</string>
+  <string name="city">Місто</string>
+  <string name="birthDate">Дата народження</string>
+  <!--fragmentError-->
+  <string name="error">Помилка</string>
+  <string name="close">Закрити</string>
+  <string name="ok">OK</string>
+  <string name="noUserAccess">Немає доступу до користувача</string>
+</resources>

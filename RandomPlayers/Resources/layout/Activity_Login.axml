@@ -15,16 +15,16 @@
         android:inputType="textEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="@string/email"
         android:id="@+id/textEmail" />
     <EditText
         android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textPassword"
-        android:hint="Password" />
+        android:hint="@string/password" />
     <Button
-        android:text="Login"
+        android:text="@string/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#263238"
@@ -32,8 +32,8 @@
         android:id="@+id/loginButton"
         android:onClick="OnLoginButtonClick" />
     <Button
-      android:layout_marginTop="20dp"
-        android:text="SignUp"
+        android:layout_marginTop="20dp"
+        android:text="@string/signUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#263238"

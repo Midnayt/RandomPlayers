@@ -20,7 +20,7 @@ using RandomPlayers.Extentions;
 using RandomPlayers.Services;
 
 namespace RandomPlayers.Activity {
-    [Activity(Label = "Casual play", MainLauncher = true, NoHistory =true, Icon = "@drawable/dice", Theme = "@style/Theme.Splash")]
+    [Activity(Label = "@string/app_name", MainLauncher = true, NoHistory =true, Icon = "@drawable/dice", Theme = "@style/Theme.Splash")]
     public class SplashScreen : AppCompatActivity {
 
         //GifImageView gifImageView;

@@ -1,5 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">RandomPlayers</string>
-  
+  <string name="app_name">Casual play</string>
+  <!--Localization-->
+  <!--LOGIN-->
+  <string name="login">Login</string>
+  <string name="email">Email</string>
+  <string name="password">Password</string>
+  <string name="signUp">SignUp</string>
+  <!--UserProfile-->
+  <string name="welcome">Welcome</string>
+  <string name="changeUserInfo">Change user information</string>
+  <string name="logout">LogOut</string>
+  <!--EditUserProfile-->
+  <string name="updateUserInfo">Update Information</string>
+  <!--SignUp-->
+  <string name="enterYourEmail">Enter your email</string>
+  <string name="enterYourPassword">Enter your password</string>
+  <string name="confirmYourPassword">Confirm your password</string>
+  <string name="register">Register</string>
+  <string name="forgotPassword">Forgot password</string>
+  <string name="or">OR</string>
+  <string name="loginMe">Already Account? Login me</string>
+  <!--UserInfo-->
+  <string name="firstName">First name</string>
+  <string name="lastName">Last Name</string>
+  <string name="country">Country</string>
+  <string name="city">City</string>
+  <string name="birthDate">date of birth</string>
+  <!--fragmentError-->
+  <string name="error">ErrReor</string>
+  <string name="close">Close</string>
+  <string name="ok">OK</string>
+  <string name="noUserAccess">There is no access to the user</string>
+
 </resources>

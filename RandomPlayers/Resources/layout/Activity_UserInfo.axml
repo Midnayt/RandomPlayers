@@ -13,35 +13,35 @@
         android:layout_gravity="center" />
     <EditText
         android:id="@+id/firstName"
-        android:hint="Введіть своє ім'я"
+        android:hint="@string/firstName"
         android:inputType="textCapWords"
         android:maxLines="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
         android:id="@+id/lastName"
-        android:hint="Введіть прізвище"
+        android:hint="@string/lastName"
         android:inputType="textCapWords"
         android:maxLines="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
         android:id="@+id/country"
-        android:hint="Країна"
+        android:hint="@string/country"
         android:inputType="textCapWords"
         android:maxLines="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <EditText
         android:id="@+id/city"
-        android:hint="Місто"
+        android:hint="@string/city"
         android:inputType="textCapWords"
         android:maxLines="1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/birthDate"
-        android:hint="Дата народження"
+        android:hint="@string/birthDate"
         android:inputType="date"
         android:maxLines="1"
         android:layout_width="match_parent"
@@ -52,7 +52,7 @@
         android:textSize="18dp" />
     <Button
         android:id="@+id/btnRegister"
-        android:text="Реєстрація"
+        android:text="@string/register"
         android:background="#263238"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"

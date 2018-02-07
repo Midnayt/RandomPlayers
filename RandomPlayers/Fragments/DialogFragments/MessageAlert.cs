@@ -15,14 +15,16 @@ namespace RandomPlayers.Fragments.DialogFragments {
 
         Action closeAction;
         string Message;
-        string Title;
-        string Button;
+        string _title;
+        string Title { get { return string.IsNullOrWhiteSpace(_title) ? Resources.GetText(Resource.String.error) : _title; } }
+        string _button;
+        string Button { get { return string.IsNullOrWhiteSpace(_button) ? Resources.GetText(Resource.String.ok) : _button; } }
 
-        public MessageAlert(string message, string title = "Помилка", string button = "OK", Action closeAction = null) {
+        public MessageAlert(string message, string title = "", string button = "", Action closeAction = null) {
+            _title = title;
+            _button = button;            
             this.closeAction = closeAction;
-            this.Message = message;
-            this.Title = title;
-            this.Button = button;
+            this.Message = message;            
         }
 
         public override void Dismiss() {

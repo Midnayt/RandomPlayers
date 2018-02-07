@@ -73,7 +73,7 @@ namespace RandomPlayers.Activity {
                         Finish();
                     }
                 } else {
-                    var newFragment = new MessageAlert("Немає достуду до користувача");
+                    var newFragment = new MessageAlert(Resources.GetText(Resource.String.noUserAccess));
                     newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
                 }
 

@@ -3509,11 +3509,23 @@ namespace RandomPlayers
 			// aapt resource value: 0x7f060039
 			public const int appbar_scrolling_view_behavior = 2131099705;
 			
+			// aapt resource value: 0x7f060055
+			public const int birthDate = 2131099733;
+			
 			// aapt resource value: 0x7f06003a
 			public const int bottom_sheet_behavior = 2131099706;
 			
+			// aapt resource value: 0x7f060047
+			public const int changeUserInfo = 2131099719;
+			
 			// aapt resource value: 0x7f06003b
 			public const int character_counter_pattern = 2131099707;
+			
+			// aapt resource value: 0x7f060054
+			public const int city = 2131099732;
+			
+			// aapt resource value: 0x7f060057
+			public const int close = 2131099735;
 			
 			// aapt resource value: 0x7f060008
 			public const int common_google_play_services_enable_button = 2131099656;
@@ -3566,11 +3578,35 @@ namespace RandomPlayers
 			// aapt resource value: 0x7f060017
 			public const int common_signin_button_text_long = 2131099671;
 			
+			// aapt resource value: 0x7f06004c
+			public const int confirmYourPassword = 2131099724;
+			
+			// aapt resource value: 0x7f060053
+			public const int country = 2131099731;
+			
 			// aapt resource value: 0x7f060002
 			public const int default_web_client_id = 2131099650;
 			
+			// aapt resource value: 0x7f060043
+			public const int email = 2131099715;
+			
+			// aapt resource value: 0x7f06004a
+			public const int enterYourEmail = 2131099722;
+			
+			// aapt resource value: 0x7f06004b
+			public const int enterYourPassword = 2131099723;
+			
+			// aapt resource value: 0x7f060056
+			public const int error = 2131099734;
+			
 			// aapt resource value: 0x7f060003
 			public const int firebase_database_url = 2131099651;
+			
+			// aapt resource value: 0x7f060051
+			public const int firstName = 2131099729;
+			
+			// aapt resource value: 0x7f06004e
+			public const int forgotPassword = 2131099726;
 			
 			// aapt resource value: 0x7f060000
 			public const int gcm_defaultSenderId = 2131099648;
@@ -3587,6 +3623,30 @@ namespace RandomPlayers
 			// aapt resource value: 0x7f060006
 			public const int google_storage_bucket = 2131099654;
 			
+			// aapt resource value: 0x7f060052
+			public const int lastName = 2131099730;
+			
+			// aapt resource value: 0x7f060042
+			public const int login = 2131099714;
+			
+			// aapt resource value: 0x7f060050
+			public const int loginMe = 2131099728;
+			
+			// aapt resource value: 0x7f060048
+			public const int logout = 2131099720;
+			
+			// aapt resource value: 0x7f060059
+			public const int noUserAccess = 2131099737;
+			
+			// aapt resource value: 0x7f060058
+			public const int ok = 2131099736;
+			
+			// aapt resource value: 0x7f06004f
+			public const int or = 2131099727;
+			
+			// aapt resource value: 0x7f060044
+			public const int password = 2131099716;
+			
 			// aapt resource value: 0x7f06003c
 			public const int password_toggle_content_description = 2131099708;
 			
@@ -3602,11 +3662,23 @@ namespace RandomPlayers
 			// aapt resource value: 0x7f060040
 			public const int path_password_strike_through = 2131099712;
 			
+			// aapt resource value: 0x7f06004d
+			public const int register = 2131099725;
+			
 			// aapt resource value: 0x7f06002b
 			public const int search_menu_title = 2131099691;
 			
+			// aapt resource value: 0x7f060045
+			public const int signUp = 2131099717;
+			
 			// aapt resource value: 0x7f06002c
 			public const int status_bar_notification_info_overflow = 2131099692;
+			
+			// aapt resource value: 0x7f060049
+			public const int updateUserInfo = 2131099721;
+			
+			// aapt resource value: 0x7f060046
+			public const int welcome = 2131099718;
 			
 			static String()
 			{
