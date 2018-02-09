@@ -71,6 +71,9 @@ namespace RandomPlayers.Activity {
                         LocalProvider.SetCurrentUser(response.ResponseObject);
                         StartActivity(new Android.Content.Intent(this, typeof(UserProfile)));
                         Finish();
+                    } else {
+                        var newFragment = new MessageAlert(response.Errors);
+                        newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
                     }
                 } else {
                     var newFragment = new MessageAlert(Resources.GetText(Resource.String.noUserAccess));

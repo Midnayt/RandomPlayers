@@ -20,6 +20,7 @@ using RandomPlayers.Contracts;
 using RandomPlayers.DBO;
 using RandomPlayers.Extentions;
 using RandomPlayers.Fragments;
+using RandomPlayers.Fragments.DialogFragments;
 using RandomPlayers.Services;
 using static Android.Views.View;
 
@@ -85,6 +86,9 @@ namespace RandomPlayers.Activity {
                 LocalProvider.SetCurrentUser(user);
                 StartActivity(new Intent(this, typeof(UserProfile)));
                 Finish();
+            } else {
+                var newFragment = new MessageAlert(response.Errors);
+                newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
             }
             dialog.Dismiss();
 

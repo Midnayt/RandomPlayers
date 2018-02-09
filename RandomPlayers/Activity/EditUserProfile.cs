@@ -18,6 +18,7 @@ using RandomPlayers.Contracts;
 using RandomPlayers.DBO;
 using RandomPlayers.Extentions;
 using RandomPlayers.Fragments;
+using RandomPlayers.Fragments.DialogFragments;
 
 namespace RandomPlayers.Activity {
     [Activity(Label = "EditUserProfile", Theme = "@style/AppTheme")]
@@ -102,8 +103,11 @@ namespace RandomPlayers.Activity {
                     LocalProvider.SetCurrentUser(user);
                     StartActivity(new Intent(this, typeof(UserProfile)));
                     Finish();
+                } else {
+                    var newFragment = new MessageAlert(response.Errors);
+                    newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
                 }
-            }catch (Exception ex) {
+            } catch (Exception ex) {
                 System.Diagnostics.Debug.WriteLine($"{this.GetType().Name}: Exception: {ex.Message}");
             }
             dialog.Dismiss();
