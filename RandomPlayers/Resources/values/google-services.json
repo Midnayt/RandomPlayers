@@ -8,17 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1086694928480:android:fe293ffa63f63531",
+        "mobilesdk_app_id": "1:1086694928480:android:8f38b22995036ca1",
         "android_client_info": {
-          "package_name": "com.vunda.RandomPlayers"
+          "package_name": "com.vunda.randomPlayers"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1086694928480-33gssgesrn7nstgfu3u3mvcfe3na22l1.apps.googleusercontent.com",
+          "client_id": "1086694928480-4placg4sn7jur2q6g50csnlh7og4rkep.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.vunda.RandomPlayers",
+            "package_name": "com.vunda.randomPlayers",
             "certificate_hash": "e7f85a3b4d0e10321bb8e3eac4334e609d176cec"
           }
         },

@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Support.V7.App;
 using Firebase;
 using Firebase.Auth;
+
 using System;
 using static Android.Views.View;
 using Android.Views;
@@ -20,7 +21,7 @@ using RandomPlayers.Services;
 using RandomPlayers.Extentions;
 
 namespace RandomPlayers.Activity {
-    [Activity(Label = "Login", MainLauncher = false, Icon = "@drawable/dice", Theme = "@style/AppTheme")]
+    [Activity(Label = "Login", MainLauncher = false, Theme = "@style/AppTheme")]
     public class Login : AppCompatActivity {
 
         ILocalProvider LocalProvider;
