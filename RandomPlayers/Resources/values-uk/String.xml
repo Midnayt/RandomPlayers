@@ -23,7 +23,7 @@
   <string name="or">Або</string>
   <string name="loginMe">Вже є обліковий запис? Увійдіть в систему</string>
   <!--UserInfo-->
-  <string name="firstName">Імя</string>
+  <string name="firstName">Ім\'я</string>
   <string name="lastName">Прізвище</string>
   <string name="country">Країна</string>
   <string name="city">Місто</string>
@@ -33,4 +33,26 @@
   <string name="close">Закрити</string>
   <string name="ok">OK</string>
   <string name="noUserAccess">Немає доступу до користувача</string>
+  <string name="emptyEmail">Введіть пошту</string>
+  <string name="emptyPassword">Введіть пароль</string>
+  <string name="passwordMistmatch">Паролі не співпадають</string>
+  <string name="weakPassword">Пароль повинен містити більше ніж 6 символів</string>
+  <!--FirebaseAuthErrors-->
+  <string name="ERROR_INVALID_CUSTOM_TOKEN">Неправильний формат токенів. Будь ласка, перевірте документацію.</string>
+  <string name="ERROR_CUSTOM_TOKEN_MISMATCH">Користувацький токен відповідає іншою аудиторії.</string>
+  <string name="ERROR_INVALID_CREDENTIAL">Вказані аутентифікаційні дані неправильно оформлені чи закінчилися.</string>
+  <string name="ERROR_INVALID_EMAIL">Невірний формат пошти</string>
+  <string name="ERROR_WRONG_PASSWORD">Пароль недійсний або користувач не має пароля.</string>
+  <string name="ERROR_USER_MISMATCH">Надані облікові дані не відповідають раніше зареєстрованому користувачеві.</string>
+  <string name="ERROR_REQUIRES_RECENT_LOGIN">Ця операція є чутливою і вимагає недавньої автентифікації. Увійдіть знову, перш ніж повторити цей запит.</string>
+  <string name="ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL">Акаунт вже існує з тією самою електронною адресою, але різні облікові дані входу. Увійдіть, використовуючи постачальника, пов\'язану з цією електронною адресою.</string>
+  <string name="ERROR_EMAIL_ALREADY_IN_USE">Електронна адреса вже використовується іншим обліковим записом.</string>
+  <string name="ERROR_CREDENTIAL_ALREADY_IN_USE">Цей обліковий запис вже пов\'язано з іншою обліковим записом користувача.</string>
+  <string name="ERROR_USER_DISABLED">Адміністратор вимкнув обліковий запис користувача.</string>
+  <string name="ERROR_USER_TOKEN_EXPIRED">Верифікація користувача більше недійсна. Користувач повинен ввійти знову.</string>
+  <string name="ERROR_USER_NOT_FOUND">Немає записів користувача, що відповідають цьому ідентифікатору. Користувач може бути видалений.</string>
+  <string name="ERROR_INVALID_USER_TOKEN">Користувацький обліковий запис більше недійсний. Користувач повинен ввійти знову.</string>
+  <string name="ERROR_OPERATION_NOT_ALLOWED">Ця операція не допускається. Ви повинні включити цю службу в консолі.</string>
+  <string name="ERROR_WEAK_PASSWORD">Cлабкий пароль.</string>
+
 </resources>

@@ -22,17 +22,17 @@ using Dmax.Dialog;
 namespace RandomPlayers.Activity {
     [Activity(Label = "SignUp", Theme = "@style/AppTheme")]
     public class SignUp : AppCompatActivity {
-                
-        EditText input_email, input_password, input_password_confirm;       
+
+        EditText input_email, input_password, input_password_confirm;
 
 
         protected override void OnCreate(Bundle savedInstanceState) {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Activity_SignUp);
-                        
+
             input_email = FindViewById<EditText>(Resource.Id.signup_email);
             input_password = FindViewById<EditText>(Resource.Id.signup_password);
-            input_password_confirm = FindViewById<EditText>(Resource.Id.signup_password_confirm);            
+            input_password_confirm = FindViewById<EditText>(Resource.Id.signup_password_confirm);
         }
 
         [Export("OnForgotPasswordTextClick")]
@@ -49,15 +49,33 @@ namespace RandomPlayers.Activity {
 
         [Export("OnRegisterButtonClick")]
         public void OnRegisterButtonClick(View view) {
-            if (input_password.Text == input_password_confirm.Text) {
-                SignUpUser(input_email.Text, input_password.Text);
-
-            } else {              
-                var newFragment = new MessageAlert("Паролі не співпадають");
-
-                //Add fragment
+            if (String.IsNullOrEmpty(input_email?.Text)) {
+                var newFragment = new MessageAlert(Resources.GetText(Resource.String.emptyEmail));
                 newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
+                return;
             }
+            if (!IsValidEmail(input_email?.Text)) {
+                var newFragment = new MessageAlert(Resources.GetText(Resource.String.ERROR_INVALID_EMAIL));
+                newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
+                return;
+            }
+            if (String.IsNullOrEmpty(input_password?.Text) || String.IsNullOrEmpty(input_password_confirm?.Text)) {
+                var newFragment = new MessageAlert(Resources.GetText(Resource.String.emptyPassword));
+                newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
+                return;
+            }
+            if (input_password?.Length() < 6) {
+                var newFragment = new MessageAlert(Resources.GetText(Resource.String.weakPassword));
+                newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
+                return;
+            }
+            if (input_password?.Text != input_password_confirm?.Text) {
+                var newFragment = new MessageAlert(Resources.GetText(Resource.String.passwordMistmatch));
+                newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
+                return;
+            }
+
+            SignUpUser(input_email?.Text, input_password?.Text);
         }
 
 
@@ -72,13 +90,20 @@ namespace RandomPlayers.Activity {
                     StartActivity(new Intent(this, typeof(UserInfo)));
                     Finish();
                 }
-            } catch (Exception ex) {
-                var newFragment = new MessageAlert(ex.Message);
-                //Add fragment
+            } catch (FirebaseAuthException ex) {
+                var eee = ex.ErrorCode;
+                int errID = Resources.GetIdentifier(eee, "string", PackageName);
+
+
+                var newFragment = new MessageAlert(Resources.GetText(errID));
                 newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
             }
             dialog.Dismiss();
-            
+
+        }
+
+        bool IsValidEmail(string email) {
+            return Android.Util.Patterns.EmailAddress.Matcher(email).Matches();
         }
 
     }

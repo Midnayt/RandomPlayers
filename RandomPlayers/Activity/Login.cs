@@ -42,8 +42,23 @@ namespace RandomPlayers.Activity {
 
         [Export("OnLoginButtonClick")]
         public void OnLoginButtonClick(View view) {
-            LoginUser(email.Text, password.Text);
+            if (String.IsNullOrEmpty(email?.Text)) {
+                var newFragment = new MessageAlert(Resources.GetText(Resource.String.emptyEmail));
+                newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
+                return;
+            }
+            if (!IsValidEmail(email?.Text)) {
+                var newFragment = new MessageAlert(Resources.GetText(Resource.String.ERROR_INVALID_EMAIL));
+                newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
+                return;
+            }
+            if (String.IsNullOrEmpty(password?.Text)) {
+                var newFragment = new MessageAlert(Resources.GetText(Resource.String.emptyPassword));
+                newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
+                return;
+            }
 
+            LoginUser(email?.Text, password?.Text);
         }
 
         //[Export("OnForgotPasswordTextClick")]
@@ -81,12 +96,21 @@ namespace RandomPlayers.Activity {
                     newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
                 }
 
-            } catch (Exception ex) {
-                var newFragment = new MessageAlert(ex.Message);
+            } catch (FirebaseAuthException ex) {
+                var eee = ex.ErrorCode;
+                int errID = Resources.GetIdentifier(eee, "string", PackageName);
+
+
+                var newFragment = new MessageAlert(Resources.GetText(errID));
                 newFragment.Show(FragmentManager.BeginTransaction(), "dialog");
 
-            };
+            }
+
             dialog.Dismiss();
+        }
+
+        public bool IsValidEmail(string email) {
+            return Android.Util.Patterns.EmailAddress.Matcher(email).Matches();
         }
 
     }

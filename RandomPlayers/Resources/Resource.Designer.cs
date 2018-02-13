@@ -3426,6 +3426,54 @@ namespace RandomPlayers
 		public partial class String
 		{
 			
+			// aapt resource value: 0x7f070065
+			public const int ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL = 2131165285;
+			
+			// aapt resource value: 0x7f070067
+			public const int ERROR_CREDENTIAL_ALREADY_IN_USE = 2131165287;
+			
+			// aapt resource value: 0x7f07005f
+			public const int ERROR_CUSTOM_TOKEN_MISMATCH = 2131165279;
+			
+			// aapt resource value: 0x7f070066
+			public const int ERROR_EMAIL_ALREADY_IN_USE = 2131165286;
+			
+			// aapt resource value: 0x7f070060
+			public const int ERROR_INVALID_CREDENTIAL = 2131165280;
+			
+			// aapt resource value: 0x7f07005e
+			public const int ERROR_INVALID_CUSTOM_TOKEN = 2131165278;
+			
+			// aapt resource value: 0x7f070061
+			public const int ERROR_INVALID_EMAIL = 2131165281;
+			
+			// aapt resource value: 0x7f07006b
+			public const int ERROR_INVALID_USER_TOKEN = 2131165291;
+			
+			// aapt resource value: 0x7f07006c
+			public const int ERROR_OPERATION_NOT_ALLOWED = 2131165292;
+			
+			// aapt resource value: 0x7f070064
+			public const int ERROR_REQUIRES_RECENT_LOGIN = 2131165284;
+			
+			// aapt resource value: 0x7f070068
+			public const int ERROR_USER_DISABLED = 2131165288;
+			
+			// aapt resource value: 0x7f070063
+			public const int ERROR_USER_MISMATCH = 2131165283;
+			
+			// aapt resource value: 0x7f07006a
+			public const int ERROR_USER_NOT_FOUND = 2131165290;
+			
+			// aapt resource value: 0x7f070069
+			public const int ERROR_USER_TOKEN_EXPIRED = 2131165289;
+			
+			// aapt resource value: 0x7f07006d
+			public const int ERROR_WEAK_PASSWORD = 2131165293;
+			
+			// aapt resource value: 0x7f070062
+			public const int ERROR_WRONG_PASSWORD = 2131165282;
+			
 			// aapt resource value: 0x7f070018
 			public const int abc_action_bar_home_description = 2131165208;
 			
@@ -3606,6 +3654,12 @@ namespace RandomPlayers
 			// aapt resource value: 0x7f070043
 			public const int email = 2131165251;
 			
+			// aapt resource value: 0x7f07005a
+			public const int emptyEmail = 2131165274;
+			
+			// aapt resource value: 0x7f07005b
+			public const int emptyPassword = 2131165275;
+			
 			// aapt resource value: 0x7f07004a
 			public const int enterYourEmail = 2131165258;
 			
@@ -3663,6 +3717,9 @@ namespace RandomPlayers
 			// aapt resource value: 0x7f070044
 			public const int password = 2131165252;
 			
+			// aapt resource value: 0x7f07005c
+			public const int passwordMistmatch = 2131165276;
+			
 			// aapt resource value: 0x7f07003c
 			public const int password_toggle_content_description = 2131165244;
 			
@@ -3692,6 +3749,9 @@ namespace RandomPlayers
 			
 			// aapt resource value: 0x7f070049
 			public const int updateUserInfo = 2131165257;
+			
+			// aapt resource value: 0x7f07005d
+			public const int weakPassword = 2131165277;
 			
 			// aapt resource value: 0x7f070046
 			public const int welcome = 2131165254;

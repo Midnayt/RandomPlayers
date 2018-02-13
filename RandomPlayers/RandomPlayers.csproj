@@ -249,9 +249,6 @@
     <AndroidResource Include="Resources\drawable\Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\splashscreen.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\dice.png" />
   </ItemGroup>
   <ItemGroup>
